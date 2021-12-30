@@ -73,3 +73,9 @@ Route::group(['prefix' => 'auth'], function () {
         return view('login');
     });
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/register', function () {
+        return view('admin.register');
+    });
+});
