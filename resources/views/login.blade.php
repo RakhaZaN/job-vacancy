@@ -15,8 +15,8 @@
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 </head>
 
 <body>
@@ -47,7 +47,7 @@
                           </div>
                         @endif
                         {{-- End Alerts --}}
-                        <form method="POST" action="/auth/login" class="needs-validation" novalidate="">
+                        <form method="POST" action="{{ route('auth.login') }}" class="needs-validation" novalidate="">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="mt-5 text-center">
-                                If you don't have an account? <a href="/register">Register</a>
+                                If you don't have an account? <a href="{{ route('register') }}">Register</a>
                             </div>
                         </form>
 
@@ -114,13 +114,13 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script>

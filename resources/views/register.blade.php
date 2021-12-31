@@ -15,8 +15,8 @@
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                     <div class="p-4 m-3">
                         <h4 class="text-dark font-weight-bold">Register</h4>
                         <p class="text-muted">Please fill in the data below</p>
-                        <form method="POST" action="/auth/register" class="needs-validation" novalidate="">
+                        <form method="POST" action="{{ route('auth.register') }}" class="needs-validation" novalidate="">
                             @csrf
                             <div class="form-group">
                                 <input id="fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" placeholder="Full Name" value="{{ old('fullname') }}">
@@ -98,13 +98,13 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script>

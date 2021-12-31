@@ -38,33 +38,39 @@ class UserController extends Controller
         if ($validatedData['role'] == "admin") {
             return redirect(url()->previous());
         }
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
-    // public function authenticate(Request $request)
-    // {
-    //     $credentials = $request->validate([
-    //         'email' => 'required|email:dns',
-    //         'password' => 'required'
-    //     ]);
-    //     // dd($credentials);
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required'
+        ]);
+        // dd($credentials);
 
-    //     if (Auth::attempt($credentials)) {
-    //         $request->session()->regenerate();
-    //         return redirect()->intended('/home');
-    //     }
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('home');
+        }
 
-    //     return back()->with('error', 'Login failed. Email / Password is wrong!');
+        return back()->with('error', 'Login failed. Email / Password is wrong!');
 
-    //     // $getUser = User::where('email', $request['email'])->first();
-    //     // dd($getPassword->password);
+        // $getUser = User::where('email', $request['email'])->first();
+        // dd($getPassword->password);
 
-    //     // if (! Hash::check($request['email'], $getUser->password)) {
-    //     //     $request->session()->flash('error', 'Email / Password is wrong');
-    //     //     return redirect(url()->previous());
-    //     // }
+        // if (! Hash::check($request['email'], $getUser->password)) {
+        //     $request->session()->flash('error', 'Email / Password is wrong');
+        //     return redirect(url()->previous());
+        // }
 
-    //     // return redirect('/home');
-    // }
+        // return redirect('/home');
+    }
+
+    public function logout() {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
 
 }
