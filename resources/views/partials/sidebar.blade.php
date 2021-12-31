@@ -9,25 +9,25 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
             <li class="nav-item dropdown active">
-                <a class="nav-link" href="/home"><i class="fas fa-home"></i> <span>Home</span></a>
+                <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> <span>Home</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/aboutus"><i class="fas fa-info-circle"></i> <span>About Us</span></a>
+                <a class="nav-link" href="{{ route('aboutus') }}"><i class="fas fa-info-circle"></i> <span>About Us</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/job-vacancy"><i class="fas fa-universal-access"></i> <span>Job Vacancy</span></a>
+                <a class="nav-link" href="{{ route('job-vacancy.index') }}"><i class="fas fa-universal-access"></i> <span>Job Vacancy</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/how-to-apply"><i class="fas fa-question-circle"></i> <span>How to Apply</span></a>
+                <a class="nav-link" href="{{ route('hta') }}"><i class="fas fa-question-circle"></i> <span>How to Apply</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/news-event"><i class="fas fa-newspaper"></i> <span>News & Events</span></a>
+                <a class="nav-link" href="{{ route('news') }}"><i class="fas fa-newspaper"></i> <span>News & Events</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> <span>Announcement</span></a>
+                <a class="nav-link" href="{{ route('announcement') }}"><i class="fas fa-bullhorn"></i> <span>Announcement</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/contact"><i class="fas fa-phone"></i> <span>Contact</span></a>
+                <a class="nav-link" href="{{ route('contact') }}"><i class="fas fa-phone"></i> <span>Contact</span></a>
             </li>
         </ul>
 
