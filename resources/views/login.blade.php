@@ -29,18 +29,34 @@
                         <div class="mb-5">
                             <button type="button" class="btn btn-sm btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Admin">
                                 <i class="fas fa-ellipsis-h"></i>
-                              </button>
+                            </button>
                         </div>
                         <h4 class="text-dark font-weight-bold">E-RECRUITMENT BSG</h4>
                         <p class="text-muted">Please enter your email and password to login</p>
+                       {{-- Alerts --}}
+                        @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+                          </div>
+                        @endif
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+                          </div>
+                        @endif
+                        {{-- End Alerts --}}
                         <form method="POST" action="/auth/login" class="needs-validation" novalidate="">
+                            @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required
-                                    autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" tabindex="1" required autofocus value="{{ old('email') }}">
+                                @error('email')
                                 <div class="invalid-feedback">
-                                    Please fill in your email
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
@@ -49,22 +65,9 @@
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password" tabindex="2"
                                     required>
-                                <div class="invalid-feedback">
-                                    please fill in your password
-                                </div>
                             </div>
 
-                            {{-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div> --}}
-
                             <div class="form-group text-right">
-                                {{-- <a href="auth-forgot-password.html" class="float-left mt-3">
-                      Forgot Password?
-                    </a> --}}
                                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                     Login
                                 </button>
@@ -85,13 +88,13 @@
                 </div> --}}
                     </div>
                 </div>
-                <div class="col-lg-8 col-12 order-lg-2 align-items-center order-1">
+                <div class="col-lg-8 col-md-6 col-12 order-lg-2 align-items-center order-1">
                     <div class="text-center index-2">
                         <div class="text-dark p-5 pb-2">
                             <div class="mb-5 pb-3">
-                                {{-- <h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1> --}}
-                                <img src="" alt="">
-                                <h5 class="font-weight-normal">Bali, Indonesia</h5>
+                                <h1 class="mb-2 display-5 font-weight-bold">E-RECRUITMENT BSG</h1>
+                                {{-- <img src="" alt=""> --}}
+                                <p class="font-weight-normal">Telp. (0431) 861759, Fax (041) 854522 <br> Jl. Sam Ratulangi No. 9 Manado 95111 <br> Bank SulutGo</p>
                             </div>
                         </div>
                     </div>

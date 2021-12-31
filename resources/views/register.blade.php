@@ -26,49 +26,45 @@
             <div class="d-flex flex-wrap align-items-center">
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white">
                     <div class="p-4 m-3">
-                        <div class="mb-5">
-                            <a href="{{ url()->previous() }}" class="btn btn-sm btn-secondary">Back</a>
-                        </div>
                         <h4 class="text-dark font-weight-bold">Register</h4>
                         <p class="text-muted">Please fill in the data below</p>
                         <form method="POST" action="/auth/register" class="needs-validation" novalidate="">
+                            @csrf
                             <div class="form-group">
-                                <input id="fullname" type="text" class="form-control" name="fullname" tabindex="1" required
-                                    autofocus placeholder="Full Name">
+                                <input id="fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" placeholder="Full Name" value="{{ old('fullname') }}">
+                                @error('fullname')
                                 <div class="invalid-feedback">
-                                    Please fill in your full name
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required
-                                    autofocus placeholder="Email Address">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email Address" value="{{ old('email') }}">
+                                @error('email')
                                 <div class="invalid-feedback">
-                                    Please fill in your email
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <input id="password" type="password" class="form-control" name="password" tabindex="2"
-                                    required placeholder="Password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                                @error('password')
                                 <div class="invalid-feedback">
-                                    Please fill in your password
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
-                            
+
                             <div class="form-group">
-                                <input id="copass" type="password" class="form-control" name="copass" tabindex="2"
-                                    required placeholder="Confirm Password">
-                                <div class="invalid-feedback">
-                                    Please fill in your confirm password
-                                </div>
+                                <input id="copass" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
                             </div>
+                            <input type="hidden" name="role" value="candidate">
 
                             <div class="form-group text-right">
-                                {{-- <a href="auth-forgot-password.html" class="float-left mt-3">
-                      Forgot Password?
-                    </a> --}}
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">Back</a>
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right">
                                     Register
                                 </button>
                             </div>
@@ -76,7 +72,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-8 col-12 order-lg-2 align-items-center order-1">
+                <div class="col-lg-8 col-md-6 col-12 order-lg-2 align-items-center order-1">
                     <div class="text-center index-2">
                         <div class="text-dark p-5 pb-2">
                             <div class="mb-5 pb-3">
