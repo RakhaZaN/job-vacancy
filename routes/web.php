@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CandidateDetailController;
 use App\Http\Controllers\UserController;
+use App\Models\CandidateDetail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,18 +36,22 @@ Route::group([
 Route::middleware('auth')->group(function() {
 
     Route::get('/home', function () {
+        Session::put('is_active', 'home');
         return view('home');
     })->name('home');
 
     Route::get('/aboutus', function () {
+        Session::put('is_active', 'aboutus');
         return view('aboutus');
     })->name('aboutus');
 
     Route::get('/news-event', function () {
+        Session::put('is_active', 'news');
         return view('news');
     })->name('news');
 
     Route::get('/how-to-apply', function () {
+        Session::put('is_active', 'hta');
         return view('hta');
     })->name('hta');
 
@@ -53,13 +60,12 @@ Route::middleware('auth')->group(function() {
     })->name('announcement');
 
     Route::get('/contact', function () {
+        Session::put('is_active', 'contact');
         return view('contact');
     })->name('contact');
 
-    Route::get('/edit-profile', function () {
-        return view('editprofile');
-    })->name('edit-profile');
-
+    Route::get('/edit-profile', [CandidateDetailController::class, 'index'])->name('edit-profile');
+    Route::post('/save-profile', [CandidateDetailController::class, 'saveChange'])->name('saveProfile');
     Route::group([
         'as' => 'job-vacancy.',
         'prefix' => 'job-vacancy'

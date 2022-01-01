@@ -8,10 +8,10 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown @if (Session::get('is_active') == "home") active @endif">
                 <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home"></i> <span>Home</span></a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (Session::get('is_active') == "aboutus") active @endif">
                 <a class="nav-link" href="{{ route('aboutus') }}"><i class="fas fa-info-circle"></i> <span>About Us</span></a>
             </li>
             <li class="nav-item dropdown">
