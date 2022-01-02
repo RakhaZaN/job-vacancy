@@ -9,8 +9,11 @@
     <section class="section">
         <div class="section-header justify-content-between">
             <h1>Job Vacancy</h1>
-            <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#applied_job">Applied Job</button>
+            @if (auth()->user()->role == 'admin')
             <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#applicants">All Applicants</button>
+            @else
+            <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#applied_job">Applied Job</button>
+            @endif
         </div>
 
         <div class="section-body">

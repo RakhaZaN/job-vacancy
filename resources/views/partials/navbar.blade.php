@@ -143,9 +143,11 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
+                @if (auth()->user()->role != 'admin')
                 <a href="{{ route('edit-profile') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Edit Profile
                 </a>
+                @endif
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('auth.logout') }}" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
