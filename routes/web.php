@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\CandidateDetailController;
+use App\Http\Controllers\JobTypeController;
+use App\Http\Controllers\JobVacancyController;
+use App\Http\Controllers\PurposeJobController;
+use App\Http\Controllers\PurposeLetterController;
 use App\Http\Controllers\UserController;
 use App\Models\CandidateDetail;
+use App\Models\JobType;
+use App\Models\PurposeLetter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -56,6 +62,7 @@ Route::middleware('auth')->group(function() {
     })->name('hta');
 
     Route::get('/announcement', function () {
+        Session::put('is_active', 'announcement');
         return view('announcement');
     })->name('announcement');
 
@@ -70,15 +77,10 @@ Route::middleware('auth')->group(function() {
         'as' => 'job-vacancy.',
         'prefix' => 'job-vacancy'
     ], function () {
-        Route::get('/', function () {
-            return view('job-vacancy.index');
-        })->name('index');
-        Route::get('/list', function () {
-            return view('job-vacancy.joblist');
-        })->name('joblist');
-        Route::get('/data', function () {
-            return view('job-vacancy.data');
-        })->name('data');
+        Route::get('/', [JobTypeController::class, 'index'])->name('index');
+        Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
+        Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
+        Route::post('/apply', [PurposeJobController::class, 'store'])->name('apply');
     });
 
     Route::group([

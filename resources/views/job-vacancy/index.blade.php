@@ -19,39 +19,25 @@
         <div class="section-body">
             <div class="row justify-content-center">
 
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('./assets/img/avatar/avatar-1.png') }}" alt="..." class="card-img-top">
-                            <div class="my-2 text-center">
-                                <a href="" class="btn btn-primary stretched-link">Internship</a>
+                @if ($job_type == null)
+                <div class="col">
+                    <p class="text-mute">Job types not available</p>
+                </div>
+                @else
+                    @foreach ($job_type as $type)
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{{ asset($type->image) }}" alt="..." class="card-img-top">
+                                <div class="my-2 text-center">
+                                    <a href="{{ route('job-vacancy.joblist', ['type' => $type->name]) }}" class="btn btn-primary stretched-link">{{ $type->name }}</a>
+                                </div>
+                                <div class="my-2 text-center text-muted">{{ $type->short_desc }}</div>
                             </div>
-                            <div class="my-2 text-center text-muted">For student who seek for work experience</div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('./assets/img/avatar/avatar-2.png') }}" alt="..." class="card-img-top">
-                            <div class="my-2 text-center">
-                                <a href="" class="btn btn-primary stretched-link">Fresh Graduate</a>
-                            </div>
-                            <div class="my-2 text-center text-muted">For student who seek for work experience</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('./assets/img/avatar/avatar-3.png') }}" alt="..." class="card-img-top">
-                            <div class="my-2 text-center">
-                                <a href="" class="btn btn-primary stretched-link">Professional</a>
-                            </div>
-                            <div class="my-2 text-center text-muted">For student who seek for work experience</div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
 
             </div>
         </div>

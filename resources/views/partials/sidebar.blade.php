@@ -14,19 +14,19 @@
             <li class="nav-item dropdown @if (Session::get('is_active') == "aboutus") active @endif">
                 <a class="nav-link" href="{{ route('aboutus') }}"><i class="fas fa-info-circle"></i> <span>About Us</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ route('job-vacancy.index') }}"><i class="fas fa-universal-access"></i> <span>Job Vacancy</span></a>
+            <li class="nav-item dropdown @if (Session::get('is_active') == "job-vacancy") active @endif">
+                <a class="nav-link " href="{{ route('job-vacancy.index') }}"><i class="fas fa-universal-access"></i> <span>Job Vacancy</span></a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" @if (Session::get('is_active') == "hta") active @endif>
                 <a class="nav-link" href="{{ route('hta') }}"><i class="fas fa-question-circle"></i> <span>How to Apply</span></a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (Session::get('is_active') == "news") active @endif">
                 <a class="nav-link" href="{{ route('news') }}"><i class="fas fa-newspaper"></i> <span>News & Events</span></a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (Session::get('is_active') == "announcement") active @endif">
                 <a class="nav-link" href="{{ route('announcement') }}"><i class="fas fa-bullhorn"></i> <span>Announcement</span></a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (Session::get('is_active') == "contact") active @endif">
                 <a class="nav-link" href="{{ route('contact') }}"><i class="fas fa-phone"></i> <span>Contact</span></a>
             </li>
             @if (auth()->user()->role == 'admin')
