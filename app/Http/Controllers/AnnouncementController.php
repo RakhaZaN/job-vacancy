@@ -14,6 +14,6 @@ class AnnouncementController extends Controller
     public function save(Request $request)
     {
         // dd($request->all());
-        return view(route('job-vacancy.index'))->with('success', 'Success make an announcement');
+        return redirect()->route('job-vacancy.index')->with('success', 'Success make an announcement');
     }
 }

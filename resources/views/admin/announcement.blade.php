@@ -8,21 +8,21 @@
 
     <section class="section">
         <div class="section-header justify-content-between">
-            <h1>Job Vacancy</h1>
+            <h1>Announcement</h1>
         </div>
 
         <div class="section-body">
             <form action="{{ route('job-vacancy.set-announce') }}" method="POST">
                 @csrf
                 <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-4">
-                                    <div class="col-4">
+                                    <div class="col-6 col-sm-4">
                                         <input type="date" name="date" id="date" class="form-control" readonly value="{{ date('Y-m-d') }}">
                                     </div>
-                                    <div class="col justify-content-end">
+                                    <div class="col-4 offset-2 offset-md-4">
                                         <select name="status" id="status" class="form-control selectric">
                                             <option value="" disabled selected>Send</option>
                                             <option value="confirmed">Confirm</option>
