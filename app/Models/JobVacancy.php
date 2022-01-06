@@ -18,4 +18,9 @@ class JobVacancy extends Model
         return $this->belongsTo(JobType::class, 'type_id');
     }
 
+    public function purpose()
+    {
+        return $this->hasMany(PurposeJob::class, 'job_vacancy_id');
+    }
+
 }

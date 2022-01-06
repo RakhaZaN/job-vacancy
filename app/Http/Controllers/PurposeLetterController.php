@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CandidateDetail;
 use App\Models\PurposeLetter;
+use App\Models\PurposeJob;
 use Illuminate\Http\Request;
 
 class PurposeLetterController extends Controller
@@ -24,19 +25,13 @@ class PurposeLetterController extends Controller
         if ($candidate == null) {
             return redirect(route('edit-profile'));
         }
-        if ($data != null) {
-            return 'ok';
-            return view('job-vacancy.data')
+
+        return view('job-vacancy.data')
             ->with('type', $request->type)
             ->with('is_intern', $typeId)
             ->with('detail', $candidate)
             ->with('letter', $data)
             ->with('jobId', $jobId);
-        }
-        return view('job-vacancy.data')
-        ->with('type', $request->type)
-        ->with('is_intern', $typeId)
-        ->with('detail', $candidate);
     }
 
     /**
@@ -57,7 +52,33 @@ class PurposeLetterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'we_title' => 'nullable|max:50',
+            'we_company' => 'nullable|max:100',
+            'we_from' => 'nullable|date',
+            'we_to' => 'nullable|date',
+            'we_description' => 'nullable|max:255',
+            'we_job_level' => 'nullable|in:director,senior,supervisor,officer,entry',
+            'edu_level' => 'required|max:50',
+            'edu_degree' => 'nullable|in:d1,d2,d3,d4,s1,s2,s3',
+            'edu_school' => 'required|max:100',
+            'edu_major' => 'required|max:100',
+            'edu_start' => 'nullable|date',
+            'edu_end' => 'nullable|date',
+            // 'file_attach' => 'required',
+        ]);
+
+        $validatedData['file_attach'] = 'file-attachment.pdf';
+
+        $upsert = PurposeLetter::updateOrCreate(['user_id' => $request->user_id, 'is_intern' => $request->is_intern], $validatedData);
+
+        PurposeJob::create([
+            'job_vacancy_id' => $request->j,
+            'purpose_letter_id' => $upsert->id,
+            'date' => date('Y/m/d')
+        ]);
+
+        return redirect()->route('job-vacancy.index')->with('success', 'Success applied job!');
     }
 
     /**

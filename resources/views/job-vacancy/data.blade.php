@@ -12,7 +12,7 @@
         </div>
 
         <div class="section-body">
-            <form action="{{ route('job-vacancy.apply') }}" method="POST">
+            <form action="{{ route('job-vacancy.save', ['j' => $jobId]) }}" method="POST">
                 @csrf
                 <div class="d-flex flex-column justify-content-center">
 
@@ -159,11 +159,11 @@
                             <h5 class="card-title">Education</h5>
                             <div class="d-flex flex-column">
                                 <select class="form-control" name="edu_level" id="graduate">
-                                    <option value="SMA" selected>SMA/SMK</option>
-                                    <option value="Undergraduate">Undergraduate</option>
+                                    <option value="SMA" @if ($letter != null && $letter->edu_level == 'SMA') selected @endif>SMA/SMK</option>
+                                    <option value="Undergraduate" @if ($letter != null && $letter->edu_level == 'Undergraduate') selected @endif>Undergraduate</option>
                                 </select>
-                                <input class="form-control mt-2" type="text" name="edu_school" id="sch_name" placeholder="School / University">
-                                <input class="form-control mt-2" type="text" name="edu_major" id="major" placeholder="Major / Field of study">
+                                <input class="form-control mt-2" type="text" name="edu_school" id="sch_name" placeholder="School / University" value="{{ $letter != null ? $letter->edu_school : ''  }}">
+                                <input class="form-control mt-2" type="text" name="edu_major" id="major" placeholder="Major / Field of study" value="{{ $letter != null ? $letter->edu_major : ''  }}">
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ class JobVacancyController extends Controller
     public function index(Request $request)
     {
         $jobs = JobType::where('name', $request->type)
-            ->with('jobList')
+            ->with(['jobList'])
             ->first();
         if ($jobs == null) {
             return redirect(route('job-vacancy.index'));

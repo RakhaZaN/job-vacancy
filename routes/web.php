@@ -80,7 +80,8 @@ Route::middleware('auth')->group(function() {
         Route::get('/', [JobTypeController::class, 'index'])->name('index');
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
-        Route::post('/apply', [PurposeJobController::class, 'store'])->name('apply');
+        Route::post('/save-letter', [PurposeLetterController::class, 'store'])->name('save');
+        // Route::get('/apply', [PurposeJobController::class, 'store'])->name('apply');
     });
 
     Route::group([

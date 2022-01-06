@@ -36,29 +36,7 @@ class PurposeJobController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
-        $validatedData = $request->validate([
-            'we_title' => 'nullable|max:50',
-            'we_company' => 'nullable|max:100',
-            'we_from' => 'nullable|date',
-            'we_to' => 'nullable|date',
-            'we_description' => 'nullable|max:255',
-            'we_job_level' => 'nullable|in:director,senior,supervisor,officer,entry',
-            'edu_level' => 'required|max:50',
-            'edu_degree' => 'nullable|in:d1,d2,d3,d4,s1,s2,s3',
-            'edu_school' => 'required|max:100',
-            'edu_major' => 'required|max:100',
-            'edu_start' => 'nullable|date',
-            'edu_end' => 'nullable|date',
-            // 'file_attach' => 'required',
-        ]);
-
-        $validatedData['file_attach'] = 'file-attachment.pdf';
-
-        PurposeLetter::updateOrCreate(['user_id' => $request->user_id, 'is_intern' => $request->is_intern], $validatedData);
-
-        return redirect(route('job-vacancy.index'))->with('success', 'Success sending purpose letter');
-
+        //
     }
 
     /**
