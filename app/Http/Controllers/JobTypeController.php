@@ -22,6 +22,16 @@ class JobTypeController extends Controller
             },
             'jobVacancy:id,title,location,employment_type',
         ])->get();
+
+        if (auth()->user()->role == 'admin') {
+            $applied = PurposeJob::where('status', 'send')
+            ->with([
+                'letter:id,user_id,is_intern,file_attach',
+                'letter.user:id,fullname,email',
+                'jobVacancy:id,type_id,title',
+                'jobVacancy.type:id,name',
+            ])->get();
+        }
         // return $applied;
         return view('job-vacancy.index')
             ->with('job_type', JobType::all())

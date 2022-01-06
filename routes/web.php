@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CandidateDetailController;
 use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\JobVacancyController;
@@ -75,7 +76,8 @@ Route::middleware('auth')->group(function() {
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
         Route::post('/save-letter', [PurposeLetterController::class, 'store'])->name('save');
-        // Route::get('/apply', [PurposeJobController::class, 'store'])->name('apply');
+        Route::get('/announcement', [AnnouncementController::class, 'create'])->name('announce');
+        Route::post('/announcement', [AnnouncementController::class, 'save'])->name('set-announce');
     });
 
     Route::group([

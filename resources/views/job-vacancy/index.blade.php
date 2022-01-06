@@ -51,6 +51,7 @@
         </div>
     </section>
 
+    @if (auth()->user()->role != 'admin')
     {{-- Modal Applied --}}
     <div class="modal fade" id="applied_job" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
@@ -62,7 +63,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-responsive-sm w-100">
+                    <table class="table table-striped table-responsive w-100">
                         <thead>
                             <tr>
                                 <th>Job Title</th>
@@ -97,7 +98,7 @@
         </div>
     </div>
     {{-- End Modal Applied --}}
-
+    @else
     {{-- Modal Applicants --}}
     <div class="modal fade" id="applicants" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
@@ -109,24 +110,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-responsive-sm w-100">
+                    <table class="table table-striped table-responsive w-100">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Gender</th>
-                                <th>Birth Date</th>
                                 <th>Applied</th>
+                                <th>Job</th>
+                                <th>Attachment</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($applies as $apply)
                             <tr>
-                                <td>Injilia Ratuntiga i</td>
-                                <td>injil.r3@gmail.com </td>
-                                <td>Female</td>
-                                <td>17/07/00</td>
-                                <td>Intership</td>
+                                <td>{{ $apply->letter->user->fullname }}</td>
+                                <td>{{ $apply->letter->user->email }}</td>
+                                <td>{{ $apply->jobVacancy->type->name }}</td>
+                                <td>{{ $apply->jobVacancy->title }}</td>
+                                <td>{{ $apply->letter->file_attach }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('job-vacancy.announce') }}" class="btn btn-info btn-sm">Announce</a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -138,5 +145,7 @@
         </div>
     </div>
     {{-- End Modal Applicants --}}
+    @endif
+
 
 @endsection
