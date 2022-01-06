@@ -12,4 +12,9 @@ class PurposeLetter extends Model
     protected $table = "purpose_letter";
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

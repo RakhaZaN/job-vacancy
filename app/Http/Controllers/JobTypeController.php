@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobType;
+use App\Models\PurposeJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -15,8 +16,16 @@ class JobTypeController extends Controller
      */
     public function index()
     {
+        $applied = PurposeJob::with([
+            'letter'=>function($q) {
+                $q->where('user_id', auth()->user()->id)->select(['id', 'user_id']);
+            },
+            'jobVacancy:id,title,location,employment_type',
+        ])->get();
+        // return $applied;
         return view('job-vacancy.index')
-            ->with('job_type', JobType::all());
+            ->with('job_type', JobType::all())
+            ->with('applies', $applied);
     }
 
     /**

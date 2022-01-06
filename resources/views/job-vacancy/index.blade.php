@@ -62,31 +62,37 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="w-100">
+                    <table class="table table-striped table-responsive-sm w-100">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
-                                <th>Birth Date</th>
-                                <th>Applied</th>
+                                <th>Job Title</th>
+                                <th>Location</th>
+                                <th>Employment Type</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if (count($applies) == 0)
                             <tr>
-                                <td>Injilia Ratuntiga i</td>
-                                <td>injil.r3@gmail.com </td>
-                                <td>Female</td>
-                                <td>17/07/00</td>
-                                <td>Intership</td>
+                                <td colspan="4" class="text-center">Not have job applied yet</td>
                             </tr>
+                            @else
+                            @foreach ($applies as $apply)
+                            <tr>
+                                <td>{{ $apply->jobVacancy->title }}</td>
+                                <td>{{ $apply->jobVacancy->location }}</td>
+                                <td>{{ $apply->jobVacancy->employment_type }}</td>
+                                <td>{{ $apply->status }}</td>
+                            </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-primary">APPLY THIS JOB</button> --}}
+                {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">APPLY THIS JOB</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -103,7 +109,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="w-100">
+                    <table class="table table-striped table-responsive-sm w-100">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -124,10 +130,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-primary">APPLY THIS JOB</button> --}}
+                {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">APPLY THIS JOB</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
