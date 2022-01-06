@@ -15,7 +15,6 @@ class JobTypeController extends Controller
      */
     public function index()
     {
-        Session::put('is_active', 'job-vacancy');
         return view('job-vacancy.index')
             ->with('job_type', JobType::all());
     }

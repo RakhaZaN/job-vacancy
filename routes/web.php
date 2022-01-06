@@ -42,32 +42,26 @@ Route::group([
 Route::middleware('auth')->group(function() {
 
     Route::get('/home', function () {
-        Session::put('is_active', 'home');
         return view('home');
     })->name('home');
 
     Route::get('/aboutus', function () {
-        Session::put('is_active', 'aboutus');
         return view('aboutus');
     })->name('aboutus');
 
     Route::get('/news-event', function () {
-        Session::put('is_active', 'news');
         return view('news');
     })->name('news');
 
     Route::get('/how-to-apply', function () {
-        Session::put('is_active', 'hta');
         return view('hta');
     })->name('hta');
 
     Route::get('/announcement', function () {
-        Session::put('is_active', 'announcement');
         return view('announcement');
     })->name('announcement');
 
     Route::get('/contact', function () {
-        Session::put('is_active', 'contact');
         return view('contact');
     })->name('contact');
 
