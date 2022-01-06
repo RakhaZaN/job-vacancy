@@ -7,11 +7,22 @@
 @section('main-content')
 
     <section class="section">
-        <div class="section-header">
+        <div class="section-header d-flex justify-content-between">
                 <h1>News & Event</h1>
+                @if (auth()->user()->role == 'admin')
+                <a href="{{ route('admin.news') }}" class="btn btn-outline-success">Add News</a>
+                @endif
         </div>
 
         <div class="section-body">
+            {{-- Alerts --}}
+            @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+                </div>
+            @endif
+            {{-- End Alerts --}}
             <div class="d-flex flex-column">
 
                 <div class="news shadow-sm">

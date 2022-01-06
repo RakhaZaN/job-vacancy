@@ -7,11 +7,7 @@ use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\PurposeJobController;
 use App\Http\Controllers\PurposeLetterController;
 use App\Http\Controllers\UserController;
-use App\Models\CandidateDetail;
-use App\Models\JobType;
-use App\Models\PurposeLetter;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,15 +72,21 @@ Route::middleware('auth')->group(function() {
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
         Route::post('/save-letter', [PurposeLetterController::class, 'store'])->name('save');
-        Route::get('/announcement', [AnnouncementController::class, 'create'])->name('announce');
-        Route::post('/announcement', [AnnouncementController::class, 'save'])->name('set-announce');
     });
 
     Route::group([
         'as' => 'admin.',
         'prefix' => 'admin'], function () {
-        Route::get('/register', function () {
-            return view('admin.register');
-        })->name('register');
+            Route::get('/register', function () {
+                return view('admin.register');
+            })->name('register');
+            Route::get('/announcement', [AnnouncementController::class, 'create'])->name('announce');
+            Route::post('/announcement', [AnnouncementController::class, 'save'])->name('set-announce');
+            Route::get('/news-event', function () {
+                return view('admin.news');
+            })->name('news');
+            Route::post('/news-event', function () {
+                return redirect(route('news'))->with('success', 'Success publish new news and event');
+            })->name('store-news');
     });
 });
