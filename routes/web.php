@@ -72,6 +72,12 @@ Route::middleware('auth')->group(function() {
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
         Route::post('/save-letter', [PurposeLetterController::class, 'store'])->name('save');
+        Route::get('/new', function () {
+            return view('admin.jobvacancy');
+        })->name('new');
+        Route::post('/new', function () {
+            return redirect(route('job-vacancy.index'))->with('success', 'Success publish new news and event');
+        })->name('store');
     });
 
     Route::group([

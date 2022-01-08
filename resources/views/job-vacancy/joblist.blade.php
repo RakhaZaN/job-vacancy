@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <table class="w-100">
+                                    <table class="table table-responsive-sm w-100">
                                         <thead>
                                             <tr>
                                                 <th><i>Location</i></th>
@@ -61,6 +61,46 @@
                     @endforeach
                 @endif
 
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4>Backend Developer</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <table class="table table-responsive-sm w-100">
+                                    <thead>
+                                        <tr>
+                                            <th><i>Location</i></th>
+                                            <th><i>Major</i></th>
+                                            <th><i>Employment type</i></th>
+                                            <th><i>Position job</i></th>
+                                            <th><i>Job function</i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Kantor Pusat</td>
+                                            <td>All Major</td>
+                                            <td>Regular</td>
+                                            <td>Officer</td>
+                                            <td>Backend Developer</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <small>Active until: 2022-02-15</small>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#pro">View Detail</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -82,7 +122,7 @@
                     </div>
                     <h4>{{ $job->title }}</h4>
                     <hr>
-                    <table class="w-100">
+                    <table class="table table-responsive-sm w-100">
                         <thead>
                             <tr>
                                 <th><i>Location</i></th>
@@ -100,7 +140,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="w-100">
+                    <table class="table table-responsive-sm w-100">
                         <thead>
                             <tr>
                                 <th><i>Education level</i></th>
@@ -131,6 +171,63 @@
         </div>
     </div>
     @endforeach
+    <div class="modal fade" id="pro" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Job Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-right">
+                        <small>Active until: 2022-02-15</small>
+                    </div>
+                    <h4>Backend Developer</h4>
+                    <hr>
+                    <table class="table table-responsive-sm w-100">
+                        <thead>
+                            <tr>
+                                <th><i>Location</i></th>
+                                <th><i>Major</i></th>
+                                <th><i>Position job</i></th>
+                                <th><i>Job function</i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kantor Pusat</td>
+                                <td>All Major</td>
+                                <td>Officer</td>
+                                <td>Backend Developer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-responsive-sm w-100">
+                        <thead>
+                            <tr>
+                                <th><i>Education level</i></th>
+                                <th><i>Employment type</i></th>
+                                <th><i>Age</i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bachelor / S1</td>
+                                <td>Regular</td>
+                                <td>20-25 years old</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('job-vacancy.data', ['j' => 0, 'type' => 'Professional']) }}" class="btn btn-primary">APPLY THIS JOB</a>
+                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- End Modal Job Detail --}}
 
 @endsection

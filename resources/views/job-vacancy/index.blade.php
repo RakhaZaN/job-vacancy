@@ -17,6 +17,11 @@
         </div>
 
         <div class="section-body">
+            @if (auth()->user()->role == 'admin')
+            <div class="text-center mb-4">
+                <a href="{{ route('job-vacancy.new') }}" class="btn btn-success">New Vacancy</a>
+            </div>
+            @endif
             {{-- Alerts --}}
             @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,7 +32,7 @@
             {{-- End Alerts --}}
             <div class="row justify-content-center">
 
-                @if ($job_type == null)
+                {{-- @if ($job_type == null)
                 <div class="col">
                     <p class="text-mute">Job types not available</p>
                 </div>
@@ -45,7 +50,41 @@
                         </div>
                     </div>
                     @endforeach
-                @endif
+                @endif --}}
+
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="..." class="card-img-top">
+                            <div class="my-2 text-center">
+                                <a href="{{ route('job-vacancy.joblist', ['type' => 'Internship']) }}" class="btn btn-primary stretched-link">Internship</a>
+                            </div>
+                            <div class="my-2 text-center text-muted">For student who seek for work experience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ asset('assets/img/avatar/avatar-2.png') }}" alt="..." class="card-img-top">
+                            <div class="my-2 text-center">
+                                <a href="{{ route('job-vacancy.joblist', ['type' => 'Fresh Graduate']) }}" class="btn btn-primary stretched-link">Fresh Graduate</a>
+                            </div>
+                            <div class="my-2 text-center text-muted">For fresh graduate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ asset('assets/img/avatar/avatar-3.png') }}" alt="..." class="card-img-top">
+                            <div class="my-2 text-center">
+                                <a href="{{ route('job-vacancy.joblist', ['type' => 'Professional']) }}" class="btn btn-primary stretched-link">Professional</a>
+                            </div>
+                            <div class="my-2 text-center text-muted">For professional</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -130,7 +169,7 @@
                                 <td>{{ $apply->jobVacancy->title }}</td>
                                 <td>{{ $apply->letter->file_attach }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('job-vacancy.announce') }}" class="btn btn-info btn-sm">Announce</a>
+                                    <a href="{{ route('admin.announce') }}" class="btn btn-info btn-sm">Announce</a>
                                 </td>
                             </tr>
                             @endforeach
