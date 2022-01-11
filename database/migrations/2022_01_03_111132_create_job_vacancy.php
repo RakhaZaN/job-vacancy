@@ -17,15 +17,14 @@ class CreateJobVacancy extends Migration
             $table->id();
             $table->foreignId('type_id')->constrained('job_type')->cascadeOnDelete();
             $table->string('title', 50);
-            $table->date('active_date');
-            $table->string('location', 255);
-            $table->string('major', 100);
-            $table->enum('employment_type', ['contract', 'regular']);
-            $table->enum('education_level', ['d1', 'd2', 'd3', 'd4', 's1', 's2', 's3'])->nullable();
-            $table->enum('position_level', ['director', 'senior', 'supervisor', 'officer', 'entry']);
-            $table->string('range_age', 10);
-            $table->text('requirements')->nullable();
-            $table->text('responsibilities')->nullable();
+            $table->date('active_date')->nullable();
+            $table->string('location', 255)->nullable();
+            $table->string('major', 100)->nullable();
+            $table->enum('employment_type', ['contract', 'regular'])->nullable();
+            $table->string('education_level', 10)->nullable();
+            $table->enum('position_level', ['director', 'senior', 'supervisor', 'officer', 'entry'])->nullable();
+            $table->string('range_age', 10)->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

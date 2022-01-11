@@ -15,6 +15,9 @@ class JobVacancyController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->type == 'Internship') {
+            return redirect()->route('job-vacancy.data', ['type' => $request->type, 'j' => 1]);
+        }
         $jobs = JobType::where('name', $request->type)
             ->with(['jobList'])
             ->first();
@@ -44,7 +47,24 @@ class JobVacancyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type_id' => 'required|in:2,3',
+            'title' => 'required|max:50',
+            'active_date' => 'required|date',
+            'location' => 'required',
+            'major' => 'required',
+            'employment_type' => 'required|in:contract,regular',
+            'education_level' => 'nullable',
+            'position_level' => 'required',
+            // 'range_age' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validated['range_age'] = '20-25';
+
+        JobVacancy::create($validated);
+
+        return redirect()->route('job-vacancy.index')->with('success', 'Successfully created new vacancy');
     }
 
     /**

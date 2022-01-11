@@ -5,7 +5,6 @@ use App\Http\Controllers\CandidateDetailController;
 use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\PurposeJobController;
-use App\Http\Controllers\PurposeLetterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/login', [UserController::class, 'admin'])->name('admin.login');
 Route::get('/login', [UserController::class, 'index'])->name('login');
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::group([
@@ -70,14 +70,12 @@ Route::middleware('auth')->group(function() {
     ], function () {
         Route::get('/', [JobTypeController::class, 'index'])->name('index');
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
-        Route::get('/data', [PurposeLetterController::class, 'index'])->name('data');
-        Route::post('/save-letter', [PurposeLetterController::class, 'store'])->name('save');
+        Route::get('/data', [PurposeJobController::class, 'index'])->name('data');
+        Route::post('/apply-job', [PurposeJobController::class, 'store'])->name('apply');
         Route::get('/new', function () {
             return view('admin.jobvacancy');
         })->name('new');
-        Route::post('/new', function () {
-            return redirect(route('job-vacancy.index'))->with('success', 'Success publish new news and event');
-        })->name('store');
+        Route::post('/new', [JobVacancyController::class, 'store'])->name('store');
     });
 
     Route::group([

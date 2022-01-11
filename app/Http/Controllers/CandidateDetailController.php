@@ -19,23 +19,37 @@ class CandidateDetailController extends Controller
 
     public function saveChange(Request $request)
     {
+        // return $request['skills'];
         $userId = $request['user_id'];
         $userValidated = $request->validate([
             'fullname' => 'required|max:50',
             'email' => 'required|email:dns|max:100',
         ]);
+        User::where('id', $userId)->update($userValidated);
+
         $candidateValidated = $request->validate([
-            'dob' => 'required|date',
-            'gender' => 'required|in:F,M',
-            'address' => 'required|max:255',
-            'phone' => 'required|max:20',
-            'country' => 'required|max:100',
-            'provincy' => 'required|max:100',
-            'city' => 'required|max:100',
-            'post_code' => 'required|max:10',
+            'dob' => 'sometimes|nullable|date',
+            'gender' => 'sometimes|nullable|in:F,M',
+            'address' => 'sometimes|nullable|max:255',
+            'phone' => 'sometimes|nullable|max:20',
+            'country' => 'sometimes|nullable|max:100',
+            'provincy' => 'sometimes|nullable|max:100',
+            'city' => 'sometimes|nullable|max:100',
+            'post_code' => 'sometimes|nullable|max:10',
+            'edu_level' => 'sometimes|nullable|max:50',
+            'edu_degree' => 'sometimes|nullable|in:d1,d2,d3,d4,s1,s2,s3',
+            'edu_school' => 'sometimes|nullable|max:100',
+            'edu_major' => 'sometimes|nullable|max:100',
+            'edu_start' => 'sometimes|nullable|date',
+            'edu_end' => 'sometimes|nullable|date',
+            'we_title' => 'sometimes|nullable|max:50',
+            'we_company' => 'sometimes|nullable|max:100',
+            'we_from' => 'sometimes|nullable|date',
+            'we_to' => 'sometimes|nullable|date',
+            'we_description' => 'sometimes|nullable|max:255',
+            'we_job_level' => 'sometimes|nullable|in:director,senior,supervisor,officer,entry',
         ]);
 
-        User::where('id', $userId)->update($userValidated);
         CandidateDetail::updateOrCreate(['user_id' => $userId], $candidateValidated);
 
         return back()->with('success', 'Successfuly saved changes !');

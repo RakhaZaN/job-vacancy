@@ -17,9 +17,4 @@ class PurposeJob extends Model
     {
         return $this->belongsTo(JobVacancy::class, 'job_vacancy_id');
     }
-
-    public function letter()
-    {
-        return $this->belongsTo(PurposeLetter::class, 'purpose_letter_id');
-    }
 }

@@ -22,14 +22,14 @@
                                     <div class="col-6 col-sm-4">
                                         <div class="form-group">
                                             <label for="active_date" class="col-form-label">Active Date</label>
-                                            <input type="date" name="active_date" id="active_date" class="form-control">
+                                            <input type="date" name="active_date" id="active_date" class="form-control @error('active_date') is-invalid @enderror" value="{{ old('active_date') }}">
                                         </div>
                                     </div>
                                     <div class="col-4 offset-2 offset-md-4">
                                         <div class="form-group">
                                             <label for="type_id" class="col-form-label">Type</label>
                                             <select name="type_id" id="type_id" class="form-control selectric">
-                                                <option value="1" selected>Internship</option>
+                                                {{-- <option value="1" selected>Internship</option> --}}
                                                 <option value="2">Fresh Graduate</option>
                                                 <option value="3">Professional</option>
                                             </select>
@@ -38,28 +38,34 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="title" class="col-form-label">Job Title</label>
-                                    <input id="title" type="text" class="form-control" name="title" tabindex="1" required autofocus placeholder="Title">
+                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" tabindex="1" required autofocus placeholder="Title" value="{{ old('title') }}">
+                                    @error('title')
                                     <div class="invalid-feedback">
-                                        Please fill in your full name
+                                        {{ $message }}
                                     </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="location" class="col-form-label">Location</label>
-                                    <input id="location" type="text" class="form-control" name="location" tabindex="1" required autofocus placeholder="Location">
+                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" tabindex="1" required autofocus placeholder="Location" value="{{ old('location') }}">
+                                    @error('location')
                                     <div class="invalid-feedback">
-                                        Please fill in your full name
+                                        {{ $message }}
                                     </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="major" class="col-form-label">Major</label>
-                                    <input id="major" type="text" class="form-control" name="major" tabindex="1" required autofocus placeholder="Major">
+                                    <input id="major" type="text" class="form-control @error('location') is-invalid @enderror" name="major" tabindex="1" required autofocus placeholder="Major" value="{{ old('major') }}">
+                                    @error('major')
                                     <div class="invalid-feedback">
-                                        Please fill in your full name
+                                        {{ $message }}
                                     </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="employment_type" class="col-form-label">Employment Type</label>
-                                    <select name="employment_type" id="employment_type" class="form-control selectric">
+                                    <select name="employment_type" id="employment_type" class="form-control selectric @error('employment_type') is-invalid @enderror">
                                         <option value="contract">Contract</option>
                                         <option value="regular">Regular</option>
                                     </select>
@@ -67,6 +73,7 @@
                                 <div class="form-group">
                                     <label for="education_level" class="col-form-label">Education</label>
                                     <select name="education_level" id="education_level" class="form-control selectric">
+                                        <option value="">No Minimum</option>
                                         <option value="d1">Associate (Diploma) 1</option>
                                         <option value="d2">Associate (Diploma) 2</option>
                                         <option value="d3">Associate (Diploma) 3</option>
@@ -77,7 +84,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="position_level" class="col-form-label">Education</label>
+                                    <label for="position_level" class="col-form-label">Position</label>
                                     <select name="position_level" id="position_level" class="form-control selectric">
                                         <option value="director">Director / General Manager</option>
                                         <option value="senior">Senior Manager / Manager</option>
@@ -88,14 +95,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-form-label">Job Desription</label>
-                                    <textarea name="description" id="description" rows="20" class="summernote w-100"></textarea>
-                                    <div class="invalid-feedback">
-                                        Please fill in your email
-                                    </div>
+                                    <textarea name="description" id="description" rows="20" class="summernote w-100 @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <a href="/home" class="btn btn-light btn-lg mr-3">Cancel</a>
+                                <a href="{{ url('/home') }}" class="btn btn-light btn-lg mr-3">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Publish</button>
                             </div>
                         </div>

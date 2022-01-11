@@ -45,7 +45,8 @@ class UserController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required|in:admin,candidate',
         ]);
         // dd($credentials);
 
@@ -71,6 +72,11 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect()->route('login');
+    }
+
+    public function admin()
+    {
+        return view('admin.login');
     }
 
 }

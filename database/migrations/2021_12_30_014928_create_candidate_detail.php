@@ -15,14 +15,27 @@ class CreateCandidateDetail extends Migration
     {
         Schema::create('candidate_detail', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->primary();
-            $table->date('dob');
-            $table->enum('gender', ['M', 'F']);
-            $table->string('address', 255);
-            $table->string('phone', 20);
-            $table->string('country', 100);
-            $table->string('provincy', 100);
-            $table->string('city', 100);
-            $table->string('post_code', 10);
+            $table->date('dob')->nullable();
+            $table->enum('gender', ['M', 'F'])->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('country', 100)->nullable();
+            $table->string('provincy', 100)->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('post_code', 10)->nullable();
+            $table->string('we_title', 50)->nullable();
+            $table->string('we_company', 100)->nullable();
+            $table->date('we_from')->nullable();
+            $table->date('we_to')->nullable();
+            $table->string('we_description', 255)->nullable();
+            $table->enum('we_job_level', ['director', 'senior', 'supervisor', 'officer', 'entry'])->nullable();
+            $table->string('edu_level', 50)->nullable();
+            $table->string('edu_degree', 10)->nullable();
+            $table->string('edu_school', 100)->nullable();
+            $table->string('edu_major', 100)->nullable();
+            $table->date('edu_start')->nullable();
+            $table->date('edu_end')->nullable();
+            $table->text('skills')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -27,11 +27,11 @@
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white">
                     <div class="p-4 m-3">
                         <div class="mb-5">
-                            <button type="button" class="btn btn-sm btn-light" data-container="body" data-toggle="popover" data-html="true" data-placement="right" data-content="<a href='{{ route('admin.login') }}'>Admin</a>">
+                            <button type="button" class="btn btn-sm btn-light" data-container="body" data-toggle="popover" data-html="true" data-placement="right" data-content="<a href='{{ route('login') }}'>User</a>">
                                 <i class="fas fa-ellipsis-h"></i>
                             </button>
                         </div>
-                        <h4 class="text-dark font-weight-bold">E-RECRUITMENT BSG</h4>
+                        <h4 class="text-dark font-weight-bold">Welcome Admin</h4>
                         <p class="text-muted">Please enter your email and password to login</p>
                        {{-- Alerts --}}
                         @if (session()->has('success'))
@@ -66,16 +66,12 @@
                                 <input id="password" type="password" class="form-control" name="password" tabindex="2"
                                     required>
                             </div>
-                            <input type="hidden" name="role" value="candidate">
+                            <input type="hidden" name="role" value="admin">
 
                             <div class="form-group text-right">
                                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                     Login
                                 </button>
-                            </div>
-
-                            <div class="mt-5 text-center">
-                                Don't have account? <a href="{{ route('register') }}">Register here</a>
                             </div>
                         </form>
 
@@ -125,13 +121,10 @@
 
     <!-- Page Specific JS File -->
     <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-        // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        // var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-        //     return new bootstrap.Popover(popoverTriggerEl)
-        // });
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        });
     </script>
 </body>
 

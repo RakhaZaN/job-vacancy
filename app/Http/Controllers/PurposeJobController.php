@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CandidateDetail;
 use App\Models\PurposeJob;
-use App\Models\PurposeLetter;
 use Illuminate\Http\Request;
 
 class PurposeJobController extends Controller
@@ -13,9 +13,16 @@ class PurposeJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
+        if ($detail == null) {
+            return redirect()->route('edit-profile')->with('warning', 'You must already set profile');
+        }
+        return view('job-vacancy.data')
+        ->with('type', $request->type)
+        ->with('jobId', $request['j'])
+        ->with('detail', $detail);
     }
 
     /**
@@ -36,7 +43,17 @@ class PurposeJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $file = $request->file('file_attach');
+        // $name_file = $request->jobId.auth()->user()->id.'_'.time().'_'.$file->getClientOriginalName();
+        // $ekstensi = $file->getClientOriginalExtension();
+        // $loc_file = public_path('UploadedFile/Attach');
+
+        // $file->move($loc_file,$name_file);
+
+        $request['file_attach'] = 'file_attach.pdf';
+        $request['date'] = date('Y/m/d');
+        PurposeJob::create($request->only(['candidate_detail_id', 'job_vacancy_id', 'date', 'file_attach']));
+        return redirect()->route('job-vacancy.index')->with('success', 'Successfully apply the job');
     }
 
     /**

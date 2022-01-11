@@ -15,11 +15,11 @@ class CreatePurposeJob extends Migration
     {
         Schema::create('purpose_job', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purpose_letter_id')->constrained('purpose_letter')->cascadeOnDelete();
+            $table->foreignId('candidate_detail_id')->constrained('candidate_detail', 'user_id')->cascadeOnDelete();
             $table->foreignId('job_vacancy_id')->constrained('job_vacancy')->cascadeOnDelete();
             $table->date('date');
             $table->enum('status', ['send', 'confirmed', 'rejected'])->default('send');
-            $table->text('announcement')->nullable();
+            $table->string('file_attach', 255);
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@
 
     <section class="section">
         <div class="section-header justify-content-between">
-            <h1>Announcement</h1>
+            <h1>News & Event</h1>
         </div>
 
         <div class="section-body">

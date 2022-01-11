@@ -17,17 +17,12 @@ class JobTypeController extends Controller
     public function index()
     {
         $applied = PurposeJob::with([
-            'letter'=>function($q) {
-                $q->where('user_id', auth()->user()->id)->select(['id', 'user_id']);
-            },
             'jobVacancy:id,title,location,employment_type',
         ])->get();
 
         if (auth()->user()->role == 'admin') {
             $applied = PurposeJob::where('status', 'send')
             ->with([
-                'letter:id,user_id,is_intern,file_attach',
-                'letter.user:id,fullname,email',
                 'jobVacancy:id,type_id,title',
                 'jobVacancy.type:id,name',
             ])->get();
