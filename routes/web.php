@@ -72,10 +72,11 @@ Route::middleware('auth')->group(function() {
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeJobController::class, 'index'])->name('data');
         Route::post('/apply-job', [PurposeJobController::class, 'store'])->name('apply');
-        Route::get('/new', function () {
-            return view('admin.jobvacancy');
-        })->name('new');
-        Route::post('/new', [JobVacancyController::class, 'store'])->name('store');
+
+        Route::get('/new', [JobVacancyController::class, 'create'])->name('new');
+        Route::post('/store', [JobVacancyController::class, 'store'])->name('store');
+        Route::get('/edit', [JobVacancyController::class, 'edit'])->name('edit');
+        Route::post('/update', [JobVacancyController::class, 'update'])->name('update');
     });
 
     Route::group([

@@ -119,7 +119,11 @@
                     {!! $job->description !!}
                 </div>
                 <div class="modal-footer">
+                    @if (auth()->user()->role == 'admin')
+                    <a href="{{ route('job-vacancy.edit', ['j' => $job->id]) }}" class="btn btn-warning">Edit</a>
+                    @else
                     <a href="{{ route('job-vacancy.data', ['j' => $job->id, 'type' => $jobs->name]) }}" class="btn btn-primary">APPLY THIS JOB</a>
+                    @endif
                     {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
                 </div>
             </div>

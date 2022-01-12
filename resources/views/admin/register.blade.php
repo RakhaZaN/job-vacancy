@@ -12,33 +12,51 @@
         </div>
 
         <div class="section-body">
+            {{-- Alerts --}}
+            @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+            </div>
+            @endif
+            {{-- End Alerts --}}
             <form action="{{ route('auth.register') }}" method="post">
+                @csrf
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <input id="fullname" type="text" class="form-control" name="fullname" tabindex="1" required
-                                        autofocus placeholder="Full Name">
+                                    <input id="fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" tabindex="1" required autofocus placeholder="Full Name">
+                                    @error('fullname')
                                     <div class="invalid-feedback">
-                                        Please fill in your full name
+                                        {{ $message }}
                                     </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" tabindex="1" required
                                         autofocus placeholder="Email Address">
-                                    <div class="invalid-feedback">
-                                        Please fill in your email
-                                    </div>
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <input id="password" type="password" class="form-control" name="password" tabindex="2"
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2"
                                         required placeholder="Password">
-                                    <div class="invalid-feedback">
-                                        Please fill in your password
-                                    </div>
+                                        @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" tabindex="2"
+                                        required placeholder="Confirmation Password">
                                 </div>
                             </div>
                             <input type="hidden" name="role" value="admin">

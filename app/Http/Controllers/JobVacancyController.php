@@ -36,7 +36,7 @@ class JobVacancyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.job-vacancy.add');
     }
 
     /**
@@ -84,9 +84,10 @@ class JobVacancyController extends Controller
      * @param  \App\Models\JobVacancy  $jobVacancy
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobVacancy $jobVacancy)
+    public function edit(JobVacancy $jobVacancy, Request $request)
     {
-        //
+        return view('admin.job-vacancy.edit')
+        ->with('job', $jobVacancy->where('id', $request->j)->first());
     }
 
     /**
@@ -98,7 +99,18 @@ class JobVacancyController extends Controller
      */
     public function update(Request $request, JobVacancy $jobVacancy)
     {
-        //
+        $validated = $request->validate([
+            'type_id' => 'required|in:2,3',
+            'title' => 'required|max:50',
+            'active_date' => 'required|date',
+            'location' => 'required',
+            'major' => 'required',
+            'employment_type' => 'required|in:contract,regular',
+            'education_level' => 'nullable',
+            'position_level' => 'required',
+            // 'range_age' => 'required',
+            'description' => 'required',
+        ]);
     }
 
     /**

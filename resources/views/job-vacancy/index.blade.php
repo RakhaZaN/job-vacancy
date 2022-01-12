@@ -105,7 +105,7 @@
     {{-- End Modal Applied --}}
     @else
     {{-- Modal Applicants --}}
-    <div class="modal fade" id="applicants" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
+    {{-- <div class="modal fade" id="applicants" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,13 +142,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">APPLY THIS JOB</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div> --}}
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- End Modal Applicants --}}
     @endif
 
