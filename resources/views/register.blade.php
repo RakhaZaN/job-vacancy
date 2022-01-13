@@ -52,7 +52,7 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
                                 @error('password')
                                 <div class="invalid-feedback">
-                                    {{ $message }}
+                                    {{ $message }}job
                                 </div>
                                 @enderror
                             </div>

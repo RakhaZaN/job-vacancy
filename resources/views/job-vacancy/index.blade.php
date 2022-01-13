@@ -105,7 +105,7 @@
     {{-- End Modal Applied --}}
     @else
     {{-- Modal Applicants --}}
-    {{-- <div class="modal fade" id="applicants" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
+    <div class="modal fade" id="applicants" tabindex="-1" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -129,11 +129,11 @@
                         <tbody>
                             @foreach ($applies as $apply)
                             <tr>
-                                <td>{{ $apply->letter->user->fullname }}</td>
-                                <td>{{ $apply->letter->user->email }}</td>
+                                <td>{{ $apply->candidate->fullname }}</td>
+                                <td>{{ $apply->candidate->email }}</td>
                                 <td>{{ $apply->jobVacancy->type->name }}</td>
                                 <td>{{ $apply->jobVacancy->title }}</td>
-                                <td>{{ $apply->letter->file_attach }}</td>
+                                <td>{{ $apply->file_attach }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('admin.announce') }}" class="btn btn-info btn-sm">Announce</a>
                                 </td>
@@ -144,7 +144,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- End Modal Applicants --}}
     @endif
 

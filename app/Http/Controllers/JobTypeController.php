@@ -23,6 +23,8 @@ class JobTypeController extends Controller
         if (auth()->user()->role == 'admin') {
             $applied = PurposeJob::where('status', 'send')
             ->with([
+                'candidate:id,fullname,email',
+                'candidate.candidateDetail',
                 'jobVacancy:id,type_id,title',
                 'jobVacancy.type:id,name',
             ])->get();

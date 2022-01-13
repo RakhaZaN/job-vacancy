@@ -93,8 +93,18 @@
                                         <option value="director" @if ($job['position_level'] == 'director') selected @endif>Director / General Manager</option>
                                     </select>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="description" class="col-form-label">Job Desription</label>
+                                    <label for="range_age" class="col-form-label">Range age</label>
+                                    <input id="range_age" type="text" class="form-control @error('range_age') is-invalid @enderror" name="range_age" tabindex="1" required autofocus placeholder="20-30" value="{{ $job['range_age'] }}">
+                                    @error('range_age')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="col-form-label">Job Description</label>
                                     <textarea name="description" id="description" rows="20" class="summernote w-100 @error('description') is-invalid @enderror">
                                         {!! $job['description'] !!}
                                     </textarea>

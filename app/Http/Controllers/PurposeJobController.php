@@ -16,9 +16,6 @@ class PurposeJobController extends Controller
     public function index(Request $request)
     {
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
-        if ($detail == null) {
-            return redirect()->route('edit-profile')->with('warning', 'You must already set profile');
-        }
         return view('job-vacancy.data')
         ->with('type', $request->type)
         ->with('jobId', $request['j'])
@@ -43,15 +40,18 @@ class PurposeJobController extends Controller
      */
     public function store(Request $request)
     {
-        // $file = $request->file('file_attach');
-        // $name_file = $request->jobId.auth()->user()->id.'_'.time().'_'.$file->getClientOriginalName();
-        // $ekstensi = $file->getClientOriginalExtension();
-        // $loc_file = public_path('UploadedFile/Attach');
+        $validated = $request->validate([
+            'job_vacancy_id' => 'exists:job_vacancy,id',
+            'candidate_detail_id' => 'exists:candidate_detail,user_id',
+            'file_attach' => 'required|file|mimes:pdf',
+            'date' => 'date'
+        ]);
 
-        // $file->move($loc_file,$name_file);
+        if ($request->file('file_attach')) {
+            $validated['file_attach'] = $request->file('file_attach')->store('attachment');
+        }
 
-        $request['file_attach'] = 'file_attach.pdf';
-        $request['date'] = date('Y/m/d');
+        // return $validated;
         PurposeJob::create($request->only(['candidate_detail_id', 'job_vacancy_id', 'date', 'file_attach']));
         return redirect()->route('job-vacancy.index')->with('success', 'Successfully apply the job');
     }

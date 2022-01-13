@@ -11,9 +11,11 @@ class CandidateDetailController extends Controller
 {
     public function index()
     {
+        $prev = url()->previous();
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
         // dd($detail);
         return view('editprofile')
+            ->with('prev', $prev)
             ->with('candidate_detail', $detail);
     }
 
@@ -37,7 +39,7 @@ class CandidateDetailController extends Controller
             'city' => 'sometimes|nullable|max:100',
             'post_code' => 'sometimes|nullable|max:10',
             'edu_level' => 'sometimes|nullable|max:50',
-            'edu_degree' => 'sometimes|nullable|in:d1,d2,d3,d4,s1,s2,s3',
+            'edu_degree' => 'sometimes|nullable',
             'edu_school' => 'sometimes|nullable|max:100',
             'edu_major' => 'sometimes|nullable|max:100',
             'edu_start' => 'sometimes|nullable|date',

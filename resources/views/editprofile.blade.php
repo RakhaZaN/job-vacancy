@@ -23,7 +23,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col offset-md-1">
-                        <a href="{{ url('/home') }}" class="btn btn-light mr-2">Back to Home</a>
+                        <a href="{{ $prev }}" class="btn btn-light mr-2">Back</a>
                         <button type="submit" class="btn btn-primary">Save Change</button>
                         <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
                     </div>
@@ -74,7 +74,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="birth_date" class="form-label">Birth</label>
-                                            <input type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" id="birth_date" value="{{ $candidate_detail != null? $candidate_detail['dob'] : '' }}">
+                                            <input type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" id="birth_date" value="{{ $candidate_detail != null? $candidate_detail['dob'] : old('dob') }}">
                                             @error('dob')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -85,7 +85,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="address" class="form-label">Address</label>
-                                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" value="{{ $candidate_detail != null? $candidate_detail['address'] : '' }}" placeholder="Address">
+                                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" value="{{ $candidate_detail != null? $candidate_detail['address'] : old('address') }}" placeholder="Address">
                                             @error('address')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -96,7 +96,7 @@
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="country" class="form-label">Country</label>
-                                            <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" id="country" value="{{ $candidate_detail != null? $candidate_detail['country'] : '' }}" placeholder="Country">
+                                            <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" id="country" value="{{ $candidate_detail != null? $candidate_detail['country'] : old('country') }}" placeholder="Country">
                                             @error('country')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -107,7 +107,7 @@
                                     <div class="col-6 col-md-4">
                                         <div class="form-group">
                                             <label for="provincy" class="form-label">Provincy</label>
-                                            <input type="text" class="form-control @error('provincy') is-invalid @enderror" name="provincy" id="provincy" value="{{ $candidate_detail != null? $candidate_detail['provincy'] : '' }}" placeholder="Provincy">
+                                            <input type="text" class="form-control @error('provincy') is-invalid @enderror" name="provincy" id="provincy" value="{{ $candidate_detail != null? $candidate_detail['provincy'] : old('provincy') }}" placeholder="Provincy">
                                             @error('provincy')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -118,7 +118,7 @@
                                     <div class="col-6 col-md-4">
                                         <div class="form-group">
                                             <label for="city" class="form-label">City</label>
-                                            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ $candidate_detail != null? $candidate_detail['city'] : '' }}" placeholder="City">
+                                            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ $candidate_detail != null? $candidate_detail['city'] : old('city') }}" placeholder="City">
                                             @error('city')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -129,7 +129,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="phone" class="form-label">Phone</label>
-                                            <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ $candidate_detail != null? $candidate_detail['phone'] : '' }}" placeholder="Phone number">
+                                            <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ $candidate_detail != null? $candidate_detail['phone'] : old('phonr') }}" placeholder="Phone number">
                                             @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -140,7 +140,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="post_code" class="form-label"></label>
-                                            <input type="number" class="form-control @error('post_code') is-invalid @enderror" name="post_code" id="post_code" value="{{ $candidate_detail != null? $candidate_detail['post_code'] : '' }}" placeholder="Post code">
+                                            <input type="number" class="form-control @error('post_code') is-invalid @enderror" name="post_code" id="post_code" value="{{ $candidate_detail != null? $candidate_detail['post_code'] : old('post_code') }}" placeholder="Post code">
                                             @error('post_code')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -165,9 +165,9 @@
                                         <div class="form-group">
                                             <label for="edu_level" class="form-label">Level</label>
                                             <select class="form-control mb-3" name="edu_level" id="edu_level">
-                                                <option value="undergraduate" @if ($candidate_detail['edu_level'] == 'undergraduate') selected @endif>Undergraduate</option>
-                                                <option value="hs" @if ($candidate_detail['edu_level'] == 'hs') selected @endif>Graduate from High School</option>
-                                                <option value="collage" @if ($candidate_detail['edu_level'] == 'collage') selected @endif>Graduate from Collage</option>
+                                                <option value="undergraduate" @if ($candidate_detail != null && $candidate_detail['edu_level'] == 'undergraduate') selected @endif>Undergraduate</option>
+                                                <option value="hs" @if ($candidate_detail != null && $candidate_detail['edu_level'] == 'hs') selected @endif>Graduate from High School</option>
+                                                <option value="collage" @if ($candidate_detail != null && $candidate_detail['edu_level'] == 'collage') selected @endif>Graduate from Collage</option>
                                             </select>
                                             @error('edu_level')
                                             <div class="invalid-feedback">
@@ -180,13 +180,13 @@
                                         <div class="form-group">
                                             <label for="degree" class="form-label">Degree</label>
                                             <select class="form-control mb-3" name="edu_degree" id="degree">
-                                                <option value="sma" @if ($candidate_detail['edu_degree'] == 'sma') selected @endif>SMA / SMK</option>
-                                                <option value="d1" @if ($candidate_detail['edu_degree'] == 'd1') selected @endif>Associate (Diploma) I</option>
-                                                <option value="d2" @if ($candidate_detail['edu_degree'] == 'd2') selected @endif>Associate (Diploma) II</option>
-                                                <option value="d3" @if ($candidate_detail['edu_degree'] == 'd3') selected @endif>Associate (Diploma) III</option>
-                                                <option value="s1" @if ($candidate_detail['edu_degree'] == 's1') selected @endif>Bachelor / S1</option>
-                                                <option value="s2" @if ($candidate_detail['edu_degree'] == 's2') selected @endif>Master / S2</option>
-                                                <option value="s3" @if ($candidate_detail['edu_degree'] == 's3') selected @endif>Doctor / S3</option>
+                                                <option value="sma" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 'sma') selected @endif>SMA / SMK</option>
+                                                <option value="d1" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 'd1') selected @endif>Associate (Diploma) I</option>
+                                                <option value="d2" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 'd2') selected @endif>Associate (Diploma) II</option>
+                                                <option value="d3" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 'd3') selected @endif>Associate (Diploma) III</option>
+                                                <option value="s1" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 's1') selected @endif>Bachelor / S1</option>
+                                                <option value="s2" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 's2') selected @endif>Master / S2</option>
+                                                <option value="s3" @if ($candidate_detail != null && $candidate_detail['edu_degree'] == 's3') selected @endif>Doctor / S3</option>
                                             </select>
                                             @error('edu_degree')
                                             <div class="invalid-feedback">
@@ -198,7 +198,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="edu_school" class="form-label">Name</label>
-                                            <input class="form-control mb-3" type="text" name="edu_school" id="edu_school" placeholder="School / University" value="{{ $candidate_detail['edu_school'] }}">
+                                            <input class="form-control mb-3 @error('edu_school') is-invalid @enderror" type="text" name="edu_school" id="edu_school" placeholder="School / University" value="{{ $candidate_detail != null? $candidate_detail['edu_school'] : old('edu_school') }}">
                                             @error('edu_school')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -209,7 +209,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="major" class="form-label">Major</label>
-                                            <input class="form-control mb-3" type="text" name="edu_major" id="major" placeholder="Major / Field of study" value="{{ $candidate_detail['edu_major'] }}">
+                                            <input class="form-control mb-3 @error('edu_major') is-invalid @enderror" type="text" name="edu_major" id="major" placeholder="Major / Field of study" value="{{ $candidate_detail != null? $candidate_detail['edu_major'] : old('edu_major') }}">
                                             @error('edu_major')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -220,7 +220,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="edu_start" class="form-label">Start</label>
-                                            <input type="date" class="form-control" name="edu_start" id="edu_start" value="{{ $candidate_detail['edu_start'] }}">
+                                            <input type="date" class="form-control @error('edu_start') is-invalid @enderror" name="edu_start" id="edu_start" value="{{ $candidate_detail != null? $candidate_detail['edu_start'] : old('edu_Start') }}">
                                             @error('edu_start')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -231,7 +231,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="edu_end" class="form-label">End</label>
-                                            <input type="date" class="form-control" name="edu_end" id="edu_end" value="{{ $candidate_detail['edu_end'] }}">
+                                            <input type="date" class="form-control @error('edu_end') is-invalid @enderror" name="edu_end" id="edu_end" value="{{ $candidate_detail != null? $candidate_detail['edu_end'] : old('edu_end') }}">
                                             @error('edu_end')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -255,7 +255,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="we_title" class="form-label">Title</label>
-                                            <input type="text" class="form-control @error('we_title') is-invalid @enderror" name="we_title" id="we_title" value="{{ $candidate_detail['we_title'] }}" placeholder="Title">
+                                            <input type="text" class="form-control @error('we_title') is-invalid @enderror" name="we_title" id="we_title" value="{{ $candidate_detail != null? $candidate_detail['we_title'] : old('we_title') }}" placeholder="Title">
                                             @error('we_title')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -266,7 +266,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="we_company" class="form-label">Company</label>
-                                            <input type="we_company" class="form-control @error('we_company') is-invalid @enderror" name="we_company" id="we_company" value="{{ $candidate_detail['we_company'] }}" placeholder="Company">
+                                            <input type="we_company" class="form-control @error('we_company') is-invalid @enderror" name="we_company" id="we_company" value="{{ $candidate_detail != null? $candidate_detail['we_company'] : old('we_company') }}" placeholder="Company">
                                             @error('we_company')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -277,7 +277,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="we_from" class="form-label">From</label>
-                                            <input type="date" class="form-control @error('dob') is-invalid @enderror" name="we_from" id="we_from" value="{{ $candidate_detail['we_from'] }}">
+                                            <input type="date" class="form-control @error('we_from') is-invalid @enderror" name="we_from" id="we_from" value="{{ $candidate_detail != null? $candidate_detail['we_from'] : old('we_from') }}">
                                             @error('we_from')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -288,7 +288,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="we_to" class="form-label">To</label>
-                                            <input type="date" class="form-control @error('dob') is-invalid @enderror" name="we_to" id="we_to" value="{{ $candidate_detail['we_to'] }}">
+                                            <input type="date" class="form-control @error('we_to') is-invalid @enderror" name="we_to" id="we_to" value="{{ $candidate_detail != null? $candidate_detail['we_to'] : old('we_to') }}">
                                             @error('we_to')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -300,11 +300,12 @@
                                         <div class="form-group">
                                             <label for="we_job_level" class="form-label">Level</label>
                                             <select class="form-control mb-3" name="we_job_level" id="we_job_level">
-                                                <option value="entry" @if ($candidate_detail['we_job_level'] == 'entry') selected @endif>Entry / Fresh Graduate</option>
-                                                <option value="officer" @if ($candidate_detail['we_job_level'] == 'officer') selected @endif>Officer / Stuff</option>
-                                                <option value="supervisor" @if ($candidate_detail['we_job_level'] == 'supervisor') selected @endif>Assistant Manager / Supervisor / Coordinator</option>
-                                                <option value="senior" @if ($candidate_detail['we_job_level'] == 'senior') selected @endif>Senior Manger / Manager</option>
-                                                <option value="director" @if ($candidate_detail['we_job_level'] == 'director') selected @endif>Director / General Manager</option>
+                                                <option value="">Select Your Position</option>
+                                                <option value="entry" @if ($candidate_detail != null && $candidate_detail['we_job_level'] == 'entry') selected @endif>Entry / Fresh Graduate</option>
+                                                <option value="officer" @if ($candidate_detail != null && $candidate_detail['we_job_level'] == 'officer') selected @endif>Officer / Stuff</option>
+                                                <option value="supervisor" @if ($candidate_detail != null && $candidate_detail['we_job_level'] == 'supervisor') selected @endif>Assistant Manager / Supervisor / Coordinator</option>
+                                                <option value="senior" @if ($candidate_detail != null && $candidate_detail['we_job_level'] == 'senior') selected @endif>Senior Manger / Manager</option>
+                                                <option value="director" @if ($candidate_detail != null && $candidate_detail['we_job_level'] == 'director') selected @endif>Director / General Manager</option>
                                             </select>
                                             @error('we_job_level')
                                             <div class="invalid-feedback">
@@ -315,8 +316,8 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="we_description" class="form-label">we_description</label>
-                                            <input type="text" class="form-control @error('we_description') is-invalid @enderror" name="we_description" id="we_description" value="{{ $candidate_detail['we_description'] }}" placeholder="we_description">
+                                            <label for="we_description" class="form-label">Description</label>
+                                            <input type="text" class="form-control @error('we_description') is-invalid @enderror" name="we_description" id="we_description" value="{{ $candidate_detail != null? $candidate_detail['we_description'] : old('we_description') }}" placeholder="we_description">
                                             @error('we_description')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -324,7 +325,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
 
                                 </div>
                             </div>

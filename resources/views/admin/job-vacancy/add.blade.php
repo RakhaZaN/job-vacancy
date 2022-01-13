@@ -103,7 +103,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="description" class="col-form-label">Job Desription</label>
+                                    <label for="description" class="col-form-label">Job Description</label>
                                     <textarea name="description" id="description" rows="20" class="summernote w-100 @error('description') is-invalid @enderror">
                                         <h3>Requirement</h3>
                                         <ul>

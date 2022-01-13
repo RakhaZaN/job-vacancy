@@ -56,11 +56,11 @@ class JobVacancyController extends Controller
             'employment_type' => 'required|in:contract,regular',
             'education_level' => 'nullable',
             'position_level' => 'required',
-            // 'range_age' => 'required',
+            'range_age' => 'required',
             'description' => 'required',
         ]);
 
-        $validated['range_age'] = '20-25';
+        // $validated['range_age'] = '20-25';
 
         JobVacancy::create($validated);
 
@@ -108,9 +108,13 @@ class JobVacancyController extends Controller
             'employment_type' => 'required|in:contract,regular',
             'education_level' => 'nullable',
             'position_level' => 'required',
-            // 'range_age' => 'required',
+            'range_age' => 'required',
             'description' => 'required',
         ]);
+
+        $jobVacancy->where('id', $request->id)->update($validated);
+
+        return redirect()->route('job-vacancy.index')->with('success', 'Successfully update vacancy');
     }
 
     /**
