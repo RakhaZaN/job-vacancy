@@ -13,7 +13,7 @@ class CandidateDetailController extends Controller
     {
         $prev = url()->previous();
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
-        // dd($detail);
+        $detail['skills'] = json_decode($detail['skills'], false);
         return view('editprofile')
             ->with('prev', $prev)
             ->with('candidate_detail', $detail);
@@ -21,7 +21,6 @@ class CandidateDetailController extends Controller
 
     public function saveChange(Request $request)
     {
-        // return $request['skills'];
         $userId = $request['user_id'];
         $userValidated = $request->validate([
             'fullname' => 'required|max:50',
@@ -52,8 +51,14 @@ class CandidateDetailController extends Controller
             'we_job_level' => 'sometimes|nullable|in:director,senior,supervisor,officer,entry',
         ]);
 
+        for ($i=0; $i < count($request['skill_name']); $i++) {
+            $candidateValidated['skills'][$i][0] = $request['skill_name'][$i];
+            $candidateValidated['skills'][$i][1] = $request['skill_level'][$i];
+        }
+        // return $candidateValidated['skills'];
+
         CandidateDetail::updateOrCreate(['user_id' => $userId], $candidateValidated);
 
-        return back()->with('success', 'Successfuly saved changes !');
+        return back()->with(['success' => 'Successfuly saved changes !', 'prev' => $request->previous_url]);
     }
 }

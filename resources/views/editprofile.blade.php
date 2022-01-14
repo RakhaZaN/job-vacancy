@@ -19,11 +19,11 @@
             </div>
             @endif
             {{-- End Alerts --}}
-            <form action="{{ route('saveProfile') }}" method="POST" class="needs-validation" novalidate>
+            <form action="{{ route('saveProfile') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="row mb-3">
                     <div class="col offset-md-1">
-                        <a href="{{ $prev }}" class="btn btn-light mr-2">Back</a>
+                        <a href="{{ session()->has('prev') ? session('prev') : $prev }}" class="btn btn-light mr-2">Back</a>
                         <button type="submit" class="btn btn-primary">Save Change</button>
                         <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
                     </div>
@@ -335,28 +335,54 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <div class="row">
-                                    <h4 class="card-title col">Skill</h4>
+                                    <h4 class="card-title col">Skills</h4>
                                     <div class="col-1 text-center">
                                         <button type="button" id="btnAdd" class="btn btn-outline-success btn-sm"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" id="skills-wrapper">
+                            <div class="card-body increment">
+                                @if ($candidate_detail != null && count($candidate_detail['skills']) > 0)
+                                @for ($i = 0; $i < count($candidate_detail['skills']); $i++)
                                 <div class="row mb-2">
                                     <div class="col-6">
-                                        <input class="form-control" type="text" name="skills[]" id="skill_name" placeholder="Add a skill" value="">
+                                        <input class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill" value="{{ $candidate_detail['skills'][$i][0] }}">
                                     </div>
                                     <div class="col-5">
-                                        <select class="form-control" name="skills[]" id="skill_lavel">
+                                        <select class="form-control" name="skill_level[]" id="skill_lavel">
+                                            <option value="basic" @if ($candidate_detail['skills'][$i][1] == 'basic') selected @endif>Basic</option>
+                                            <option value="intermediate" @if ($candidate_detail['skills'][$i][1] == 'intermediate') selected @endif>Intermediate</option>
+                                            <option value="expert" @if ($candidate_detail['skills'][$i][1] == 'expert') selected @endif>Expert</option>
+                                        </select>
+                                    </div>
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-danger btn-sm btn-rm"><i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+                                @endfor
+                                @else
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <input class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill" value="">
+                                    </div>
+                                    <div class="col-5">
+                                        <select class="form-control" name="skill_level[]" id="skill_lavel">
                                             <option value="basic">Basic</option>
                                             <option value="intermediate">Intermediate</option>
                                             <option value="expert">Expert</option>
                                         </select>
                                     </div>
-                                    <div class="col text-center"><button type="button" onclick="rm()" class="btn btn-outline-danger btn-sm"><i class="fas fa-minus"></i></button></div>
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-outline-danger btn-sm btn-rm"><i class="fas fa-minus"></i></button>
+                                    </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-10 text-right">
+                        <button type="submit" class="btn btn-primary">Save Change</button>
+                        <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
                     </div>
                 </div>
             </form>
@@ -368,27 +394,34 @@
 @endsection
 
 @section('script-page')
+<div class="clone d-none">
+    <div class="row mb-2">
+        <div class="col-6">
+            <input class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill" value="">
+        </div>
+        <div class="col-5">
+            <select class="form-control" name="skill_level[]" id="skill_lavel">
+                <option value="basic">Basic</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+            </select>
+        </div>
+        <div class="col text-center">
+            <button type="button" class="btn btn-outline-danger btn-sm btn-rm"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+</div>
+
 <script>
-    $('#btnAdd').on('click', function () {
-        // alert('oke')
-        $('#skills-wrapper').append(`<div class="row mb-2">
-            <div class="col-6">
-                <input class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill">
-            </div>
-            <div class="col-5">
-                <select class="form-control" name="skill_level[]" id="skill_lavel">
-                    <option value="basic">Basic</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="expert">Expert</option>
-                </select>
-            </div>
-            <div class="col text-center"><button type="button" onclick="rm()" class="btn btn-outline-danger btn-sm"><i class="fas fa-minus"></i></button></div>
-        </div>`)
+    $(document).ready(function () {
+        $('#btnAdd').click(function () {
+            const inpSkill = $('.clone').html()
+            $('.increment').append(inpSkill)
+        })
+
+        $('body').on('click', '.btn-rm', function () {
+            $(this).closest('.row').remove()
+        })
     })
-
-
-    function rm() {
-        $(this).closest('.row.mb-2').remove()
-    }
 </script>
 @endsection
