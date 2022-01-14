@@ -6,6 +6,7 @@ use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\PurposeJobController;
 use App\Http\Controllers\UserController;
+use App\Models\PurposeJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +73,8 @@ Route::middleware('auth')->group(function() {
         Route::get('/list', [JobVacancyController::class, 'index'])->name('joblist');
         Route::get('/data', [PurposeJobController::class, 'index'])->name('data');
         Route::post('/apply-job', [PurposeJobController::class, 'store'])->name('apply');
+        Route::get('/upload-file', [PurposeJobController::class, 'uploadFile'])->name('upload-file');
+        Route::post('/upload-file', [PurposeJobController::class, 'upload'])->name('upload');
 
         Route::get('/new', [JobVacancyController::class, 'create'])->name('new');
         Route::post('/store', [JobVacancyController::class, 'store'])->name('store');

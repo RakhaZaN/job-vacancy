@@ -13,7 +13,9 @@ class CandidateDetailController extends Controller
     {
         $prev = url()->previous();
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
-        $detail['skills'] = json_decode($detail['skills'], false);
+        if ($detail !== null) {
+            $detail['skills'] = json_decode($detail['skills'], false);
+        }
         return view('editprofile')
             ->with('prev', $prev)
             ->with('candidate_detail', $detail);
@@ -55,7 +57,7 @@ class CandidateDetailController extends Controller
             $candidateValidated['skills'][$i][0] = $request['skill_name'][$i];
             $candidateValidated['skills'][$i][1] = $request['skill_level'][$i];
         }
-        // return $candidateValidated['skills'];
+        $candidateValidated['skills'] = json_encode($candidateValidated['skills']);
 
         CandidateDetail::updateOrCreate(['user_id' => $userId], $candidateValidated);
 

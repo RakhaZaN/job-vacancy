@@ -133,7 +133,7 @@
                                 <td>{{ $apply->candidate->email }}</td>
                                 <td>{{ $apply->jobVacancy->type->name }}</td>
                                 <td>{{ $apply->jobVacancy->title }}</td>
-                                <td>{{ $apply->file_attach }}</td>
+                                <td>{{ asset('storage/'.$apply->file_attach) }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('admin.announce') }}" class="btn btn-info btn-sm">Announce</a>
                                 </td>

@@ -6,14 +6,14 @@
 
 @section('main-content')
 
-    <section class="section">
+<form action="{{ route('job-vacancy.apply') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+<section class="section">
         <div class="section-header justify-content-between">
             <h1>{{ $type }}</h1>
         </div>
 
-        <div class="section-body">
-            <form action="{{ route('job-vacancy.apply') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+            <div class="section-body">
                 <div class="row justify-content-center">
 
                     <div class="col-12 col-md-8">
@@ -43,43 +43,14 @@
                     </div>
 
 
-
-                    <div class="col-12 col-md-8">
-                    </div>
-                    @if ($jobId != 1)
-
                     <div class="col-12 col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
+                                @if ($jobId != 1)
                                 <h4 class="card-title">Requirement</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="card card-warning">
-                                    <div class="card-body">
-                                        1. Please fill in your profile field
-                                    </div>
-                                </div>
-                                <div class="card card-warning">
-                                    <div class="card-body">
-                                        2. Please upload your CV / Resume
-                                    </div>
-                                </div>
-                                <div class="card card-info">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Upload CV / Resume</h6>
-                                        <input class="form-control" type="file" name="file_attach" id="formFile">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @else
-
-                    <div class="col-12 col-md-8">
-                        <div class="card card-primary">
-                            <div class="card-header">
+                                @else
                                 <h4 class="card-title">Internship Requirement</h4>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <div class="card card-warning">
@@ -89,21 +60,34 @@
                                 </div>
                                 <div class="card card-warning">
                                     <div class="card-body">
+                                        @if ($jobId != 1)
+                                        2. Please upload your CV / Resume
+                                        @else
                                         2. Please upload your internship application letter
+                                        @endif
                                     </div>
-                                </div>
-                                <div class="card card-info">
-                                    <div class="card-body">
+                                    <div class="card-footer">
+                                        @if ($jobId != 1)
+                                        <h6>Upload CV / Resume</h6>
+                                        @else
                                         <h6 class="card-title">Internship Application Letter</h6>
-                                        <small><b>Note:</b> This internship application letter is an official letter from a school or university</small>
-                                        <input class="form-control" type="file" name="file_attach" id="formFile">
+                                        <p><b>Note:</b> This internship application letter is an official letter from a school or university</p>
+                                        @endif
+                                        {{-- <input class="form-control" type="file" name="file_attach" id="formFile">
+                                        @if ($pathFile != null)
+                                        <a href="{{ asset('storage/'. $pathFile) }}" target="_blank" class="btn btn-outline-warning mt-3">Current Attachment</a>
+                                        @else
+                                        <small class="text-danger">You haven't file uploaded yet</small>
+                                        @endif --}}
+                                        <button type="button" data-toggle="modal" data-target="#uploadFile" class="btn btn-outline-primary">Upload File</button>
+                                        @error('file_attach')
+                                        <span class="text-danger">Select your file before apply</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    @endif
 
                     <div class="col-12 col-md-8">
                         <a href="{{ route('job-vacancy.index') }}" class="btn btn-light ml-2">Cancel</a>
@@ -114,36 +98,41 @@
                     <input type="hidden" name="candidate_detail_id" value="{{ auth()->user()->id }}">
 
                 </div>
-            </form>
+            </div>
+        </section>
+        {{-- Modal --}}
+        <div class="modal fade" id="uploadFile" tabindex="-2" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Upload File</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card card-primary">
+                            <div class="card-body">
+                                <input class="form-control mb-3" type="file" name="file_attach" id="formFile">
+                                <h4 class="card-title">File Uploaded</h4>
+                                @if ($pathFile == null)
+                                <p>No File Uploaded</p>
+                                @else
+                                <iframe src="{{ asset('storage/'.$pathFile) }}" frameborder="0" class="w-100" height="500px"></iframe>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close to Apply</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+        {{-- End Modal --}}
+    </form>
 
     <section class="section-footer py-5"></section>
 
-@endsection
 
-@section('script-page')
-{{-- <script>
-    $('#btnAdd').on('click', function () {
-        // alert('oke')
-        $('#skills-wrapper').append(`<div class="row mt-2">
-            <div class="col-6">
-                <input class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill">
-            </div>
-            <div class="col-5">
-                <select class="form-control" name="skill_level[]" id="skill_lavel">
-                    <option value="basic">Basic</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="expert">Expert</option>
-                </select>
-            </div>
-            <div class="col text-center"><button onclick="rm()" class="btn btn-outline-danger btn-sm"><i class="fas fa-minus"></i></button></div>
-        </div>`)
-    })
-
-
-    function rm() {
-        $(this).closest('.row').remove()
-    }
-</script> --}}
 @endsection

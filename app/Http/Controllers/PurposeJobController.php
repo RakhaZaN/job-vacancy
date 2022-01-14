@@ -16,9 +16,11 @@ class PurposeJobController extends Controller
     public function index(Request $request)
     {
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
+        $data = PurposeJob::where('job_vacancy_id', $request['j'])->where('candidate_detail_id', auth()->user()->id)->first();
         return view('job-vacancy.data')
         ->with('type', $request->type)
         ->with('jobId', $request['j'])
+        ->with('pathFile', $data['file_attach'] ?? null)
         ->with('detail', $detail);
     }
 
@@ -52,7 +54,10 @@ class PurposeJobController extends Controller
         }
 
         // return $validated;
-        PurposeJob::create($request->only(['candidate_detail_id', 'job_vacancy_id', 'date', 'file_attach']));
+        PurposeJob::updateOrCreate([
+            'job_vacancy_id' => $validated['job_vacancy_id'],
+            'candidate_detail_id' => $validated['candidate_detail_id']
+        ], $validated);
         return redirect()->route('job-vacancy.index')->with('success', 'Successfully apply the job');
     }
 
