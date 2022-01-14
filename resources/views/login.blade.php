@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 </head>
 
-<body>
+<body class="bg-white">
 
     <div id="app">
         <section class="section">
             <div class="d-flex flex-wrap align-items-center">
-                <div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white">
+                <div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2">
                     <div class="p-4 m-3">
                         <div class="mb-5">
                             <button type="button" class="btn btn-sm btn-light" data-container="body" data-toggle="popover" data-html="true" data-placement="right" data-content="<a href='{{ route('admin.login') }}'>Admin</a>">
@@ -93,8 +93,8 @@
                     <div class="text-center index-2">
                         <div class="text-dark p-5 pb-2">
                             <div class="mb-5 pb-3">
+                                <img src="{{ asset('assets/img/logo bsg.jpg') }}" alt="logo">
                                 <h1 class="mb-2 display-5 font-weight-bold">E-RECRUITMENT BSG</h1>
-                                {{-- <img src="" alt=""> --}}
                                 <p class="font-weight-normal">Telp. (0431) 861759, Fax (041) 854522 <br> Jl. Sam Ratulangi No. 9 Manado 95111 <br> Bank SulutGo</p>
                             </div>
                         </div>
