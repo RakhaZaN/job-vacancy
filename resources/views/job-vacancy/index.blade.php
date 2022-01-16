@@ -68,7 +68,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-responsive w-100">
+                    <table class="table table-striped table-responsive-sm w-100">
                         <thead>
                             <tr>
                                 <th>Job Title</th>
@@ -95,10 +95,6 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">APPLY THIS JOB</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -115,7 +111,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-responsive w-100">
+                    <table class="table table-striped table-responsive-sm w-100">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -133,9 +129,11 @@
                                 <td>{{ $apply->candidate->email }}</td>
                                 <td>{{ $apply->jobVacancy->type->name }}</td>
                                 <td>{{ $apply->jobVacancy->title }}</td>
-                                <td>{{ asset('storage/'.$apply->file_attach) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.announce') }}" class="btn btn-info btn-sm">Announce</a>
+                                    <a href="{{ asset('storage/'.$apply->file_attach) }}" target="_blank" class="btn btn-warning btn-sm">view</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('admin.announce', ['pj' => $apply->id]) }}" class="btn btn-info btn-sm">Announce</a>
                                 </td>
                             </tr>
                             @endforeach
