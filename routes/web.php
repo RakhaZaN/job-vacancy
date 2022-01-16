@@ -55,9 +55,7 @@ Route::middleware('auth')->group(function() {
         return view('hta');
     })->name('hta');
 
-    Route::get('/announcement', function () {
-        return view('announcement');
-    })->name('announcement');
+    Route::get('/announcement', [AnnouncementController::class, 'index'])->name('announcement');
 
     Route::get('/contact', function () {
         return view('contact');
@@ -89,7 +87,7 @@ Route::middleware('auth')->group(function() {
                 return view('admin.register');
             })->name('register');
             Route::get('/announcement', [AnnouncementController::class, 'create'])->name('announce');
-            Route::post('/announcement', [AnnouncementController::class, 'save'])->name('set-announce');
+            Route::post('/announcement', [AnnouncementController::class, 'save'])->name('post.announce');
             Route::get('/news-event', function () {
                 return view('admin.news');
             })->name('news');

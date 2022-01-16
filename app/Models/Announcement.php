@@ -13,7 +13,7 @@ class Announcement extends Model
 
     protected $guarded = [];
 
-    public function job()
+    public function purposeJob()
     {
         return $this->belongsTo(PurposeJob::class, 'purpose_job_id');
     }
