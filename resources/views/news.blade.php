@@ -25,50 +25,24 @@
             {{-- End Alerts --}}
             <div class="d-flex flex-column">
 
-                <div class="news shadow-sm">
-                    <div class="news-title mb-3">
-                        <h3>Looking Stunning, Bank SulutGo Choir Wins Second Place</h3>
-                        <small>Thursday, 25th November 2021</small>
+                @forelse ($news as $n)
+                <div class="card border border-primary">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="carc-title">{{ $n['title'] }}</h4>
+                        <span>{{ $n['post_date'] }}</span>
                     </div>
-                    <div class="news-content row">
+                    <div class="card-body row align-items-center">
                         <div class="col-12 col-md-4">
-                            <img src="{{ asset('./assets/img/example-image.jpg') }}" class="news-img w-100" alt="...">
+                            <img src="{{ asset('storage/'. $n['picture']) }}" class="news-img w-100" alt="thumbnail">
                         </div>
-                        <div class="col align-self-center">
-                            <p>Representatives of the Bank SulutGo Choir won 2nd place again when appearing in the Financial Services Sector Choir Competition, virtually</p>
-                        </div>
+                        <article class="col">
+                            {!! $n['body'] !!}
+                        </article>
                     </div>
                 </div>
-                <div class="news shadow-sm">
-                    <div class="news-title mb-3">
-                        <h3>Looking Stunning, Bank SulutGo Choir Wins Second Place</h3>
-                        <small>Thursday, 25th November 2021
-                        </small>
-                    </div>
-                    <div class="news-content row">
-                        <div class="col-12 col-md-4">
-                            <img src="{{ asset('./assets/img/example-image.jpg') }}" class="news-img w-100" alt="...">
-                        </div>
-                        <div class="col align-self-center">
-                            <p>Representatives of the Bank SulutGo Choir won 2nd place again when appearing in the Financial Services Sector Choir Competition, virtually</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="news shadow-sm">
-                    <div class="news-title mb-3">
-                        <h3>Looking Stunning, Bank SulutGo Choir Wins Second Place</h3>
-                        <small>Thursday, 25th November 2021
-                        </small>
-                    </div>
-                    <div class="news-content row">
-                        <div class="col-12 col-md-4">
-                            <img src="{{ asset('./assets/img/example-image.jpg') }}" class="news-img w-100" alt="...">
-                        </div>
-                        <div class="col align-self-center">
-                            <p>Representatives of the Bank SulutGo Choir won 2nd place again when appearing in the Financial Services Sector Choir Competition, virtually</p>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                <h4>Not any news & event created</h4>
+                @endforelse
 
             </div>
         </div>

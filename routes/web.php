@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CandidateDetailController;
 use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\JobVacancyController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PurposeJobController;
 use App\Http\Controllers\UserController;
 use App\Models\PurposeJob;
@@ -47,13 +48,11 @@ Route::middleware('auth')->group(function() {
         return view('aboutus');
     })->name('aboutus');
 
-    Route::get('/news-event', function () {
-        return view('news');
-    })->name('news');
-
     Route::get('/how-to-apply', function () {
         return view('hta');
     })->name('hta');
+
+    Route::get('/news-event', [NewsController::class, 'index'])->name('news');
 
     Route::get('/announcement', [AnnouncementController::class, 'index'])->name('announcement');
 
@@ -88,11 +87,7 @@ Route::middleware('auth')->group(function() {
             })->name('register');
             Route::get('/announcement', [AnnouncementController::class, 'create'])->name('announce');
             Route::post('/announcement', [AnnouncementController::class, 'save'])->name('post.announce');
-            Route::get('/news-event', function () {
-                return view('admin.news');
-            })->name('news');
-            Route::post('/news-event', function () {
-                return redirect(route('news'))->with('success', 'Success publish new news and event');
-            })->name('store-news');
+            Route::get('/news-event', [NewsController::class, 'create'])->name('news');
+            Route::post('/news-event', [NewsController::class, 'store'])->name('store-news');
     });
 });
