@@ -105,7 +105,8 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">All Applicants</h5>
+                    <h5 class="modal-title">Applicants</h5>
+                    <a href="{{ route('job-vacancy.file-submitted') }}" class="btn btn-outline-info btn-sm ml-3">See more</a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

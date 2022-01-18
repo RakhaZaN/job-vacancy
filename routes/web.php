@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/store', [JobVacancyController::class, 'store'])->name('store');
         Route::get('/edit', [JobVacancyController::class, 'edit'])->name('edit');
         Route::post('/update', [JobVacancyController::class, 'update'])->name('update');
+        Route::get('/file-submitted', [PurposeJobController::class, 'show'])->name('file-submitted');
     });
 
     Route::group([

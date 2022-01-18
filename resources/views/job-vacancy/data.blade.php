@@ -20,7 +20,7 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <div class="col-6 col-md-3">
-                                    <input type="date" class="form-control" name="date" value="{{ date('Y-m-d') }}" readonly>
+                                    <input type="date" class="form-control" name="date" value="{{ $date ?? date('Y-m-d') }}" readonly>
                                 </div>
                             </div>
                             <div class="card-body">

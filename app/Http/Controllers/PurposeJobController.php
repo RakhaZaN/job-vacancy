@@ -21,18 +21,9 @@ class PurposeJobController extends Controller
         return view('job-vacancy.data')
         ->with('type', $request->type)
         ->with('jobId', $request['j'])
+        ->with('date', $data['date'] ?? null)
         ->with('pathFile', $data['file_attach'] ?? null)
         ->with('detail', $detail);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -78,5 +69,17 @@ class PurposeJobController extends Controller
         }
 
         return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['fileUploaded' => $validated['file_attach'], 'success' => 'Successfully upload file']);
+    }
+
+    public function show()
+    {
+        $data = PurposeJob::with([
+            'candidate:id,fullname',
+            'jobVacancy:id,title'
+        ])->orderBy('date', 'desc')->get();
+
+        // return $data;
+
+        return view('job-vacancy.submitted', compact('data'));
     }
 }
