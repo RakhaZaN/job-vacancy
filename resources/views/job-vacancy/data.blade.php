@@ -31,14 +31,18 @@
                                     <div class="col">
                                         <h1>{{ auth()->user()->fullname }}</h1>
                                         <p><i class="fas fa-envelope"></i> {{ auth()->user()->email }}</p>
+                                        @if (auth()->user()->role != 'admin')
                                         <p><i class="fas fa-map-marker-alt"></i> @if ($detail != null) {{ $detail->address }} {{ $detail->city }}, {{ $detail->provincy }} @endif</p>
                                         <p><i class="fas fa-phone"></i>@if ($detail != null) {{ $detail->phone }} @endif</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
+                            @if (auth()->user()->role != 'admin')
                             <div class="card-footer text-center bg-light">
                                 <a href="{{ route('edit-profile') }}">Edit Profile</a>
                             </div>
+                            @endif
                         </div>
                     </div>
 
@@ -79,7 +83,14 @@
                                         @else
                                         <small class="text-danger">You haven't file uploaded yet</small>
                                         @endif --}}
-                                        <button type="button" data-toggle="modal" data-target="#uploadFile" class="btn btn-outline-primary">Upload File</button>
+                                        {{-- <button type="button" data-toggle="modal" data-target="#uploadFile" class="btn btn-outline-primary">Upload File</button> --}}
+                                        @if (session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
+                                            </div>
+                                        @endif
+                                        <a href="{{ route('job-vacancy.upload-file', ['j' => $jobId]) }}" class="btn btn-outline-primary">Upload File</a>
                                         @error('file_attach')
                                         <span class="text-danger">Select your file before apply</span>
                                         @enderror
@@ -96,40 +107,11 @@
 
                     <input type="hidden" name="job_vacancy_id" value="{{ $jobId }}">
                     <input type="hidden" name="candidate_detail_id" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="file_attach" value="{{ session()->has('fileUploaded') ? session('fileUploaded') : $pathFile }}">
 
                 </div>
             </div>
         </section>
-        {{-- Modal --}}
-        <div class="modal fade" id="uploadFile" tabindex="-2" role="dialog" aria-labelledby="modalJobDetail" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Upload File</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <input class="form-control mb-3" type="file" name="file_attach" id="formFile">
-                                <h4 class="card-title">File Uploaded</h4>
-                                @if ($pathFile == null)
-                                <p>No File Uploaded</p>
-                                @else
-                                <iframe src="{{ asset('storage/'.$pathFile) }}" frameborder="0" class="w-100" height="500px"></iframe>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close to Apply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- End Modal --}}
     </form>
 
     <section class="section-footer py-5"></section>

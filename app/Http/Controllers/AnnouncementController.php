@@ -11,7 +11,7 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        $announcements = Announcement::whereHas('job', function(Builder $q) {
+        $announcements = Announcement::whereHas('purposeJob', function(Builder $q) {
             $q->where('candidate_detail_id', auth()->user()->id);
         })->get();
 
