@@ -88,12 +88,18 @@
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                                             {{ session('success') }}
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>x</span></button>
-                                            </div>
+                                        </div>
                                         @endif
                                         <a href="{{ route('job-vacancy.upload-file', ['j' => $jobId]) }}" class="btn btn-outline-primary">Upload File</a>
                                         @error('file_attach')
                                         <span class="text-danger">Select your file before apply</span>
                                         @enderror
+                                        <div class="card card-warning mt-3">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Selected File</h6>
+                                                <iframe src="{{ asset('storage/'. $pathFile) }}" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +113,7 @@
 
                     <input type="hidden" name="job_vacancy_id" value="{{ $jobId }}">
                     <input type="hidden" name="candidate_detail_id" value="{{ auth()->user()->id }}">
-                    <input type="hidden" name="file_attach" value="{{ session()->has('fileUploaded') ? session('fileUploaded') : $pathFile }}">
+                    <input type="hidden" name="file_attach" value="{{ $pathFile }}">
 
                 </div>
             </div>

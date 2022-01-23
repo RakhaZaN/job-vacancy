@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\CandidateDetail;
 use App\Models\PurposeJob;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PurposeJobController extends Controller
 {
@@ -18,11 +17,19 @@ class PurposeJobController extends Controller
     {
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
         $data = PurposeJob::where('job_vacancy_id', $request['j'])->where('candidate_detail_id', auth()->user()->id)->first();
+        $filename = null;
+        if ($data != null) {
+            $filename = $data['file_attach'];
+        }
+        if ($request->has('selected')) {
+            $filename = $request->selected;
+        }
+
         return view('job-vacancy.data')
         ->with('type', $request->type)
         ->with('jobId', $request['j'])
         ->with('date', $data['date'] ?? null)
-        ->with('pathFile', $data['file_attach'] ?? null)
+        ->with('pathFile', $filename)
         ->with('detail', $detail);
     }
 
@@ -49,27 +56,6 @@ class PurposeJobController extends Controller
         return redirect()->route('job-vacancy.index')->with('success', 'Successfully apply the job');
     }
 
-    public function uploadFile(Request $request)
-    {
-        $data = PurposeJob::where('job_vacancy_id', $request['j'])->where('candidate_detail_id', auth()->user()->id)->first();
-        return view('job-vacancy.uploadfile')->with(['pathFile' => $data['file_attach'] ?? null, 'jobId' => $request['j']]);
-    }
-
-    public function upload(Request $request)
-    {
-        $validated = $request->validate([
-            'file_attach' => 'file|mimes:pdf'
-        ]);
-
-        if ($request->file('file_attach')) {
-            if ($request['old_file']) {
-                Storage::delete($request['old_file']);
-            }
-            $validated['file_attach'] = $request->file('file_attach')->store('attachment');
-        }
-
-        return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['fileUploaded' => $validated['file_attach'], 'success' => 'Successfully upload file']);
-    }
 
     public function show()
     {

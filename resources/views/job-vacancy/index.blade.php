@@ -52,6 +52,21 @@
                     @endforeach
                 @endif
 
+                @if (count($nullFileJob) > 0)
+                <div class="col-12 d-flex flex-column">
+                    <h4>Purpose without attachment</h4>
+                    @forelse ($nullFileJob as $job)
+                    <div class="card">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5>{{ $job->jobVacancy->title }}</h5>
+                            <a href="{{ route('job-vacancy.upload-file', ['j' => $job->jobVacancy->id]) }}" class="btn btn-outline-primary">Upload File</a>
+                        </div>
+                    </div>
+                    @empty
+                    @endforelse
+                </div>
+                @endif
+
             </div>
         </div>
     </section>
