@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/upload-file', [UploadedController::class, 'index'])->name('upload-file');
         Route::post('/upload-file', [UploadedController::class, 'store'])->name('upload');
         Route::post('/delete-upload', [UploadedController::class, 'destroy'])->name('del-upload');
+        Route::get('/submitted-file', [UploadedController::class, 'show'])->name('submitted');
 
         Route::get('/new', [JobVacancyController::class, 'create'])->name('new');
         Route::post('/store', [JobVacancyController::class, 'store'])->name('store');

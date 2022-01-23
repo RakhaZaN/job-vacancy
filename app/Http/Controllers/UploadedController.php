@@ -48,4 +48,13 @@ class UploadedController extends Controller
 
         return redirect()->route('job-vacancy.upload-file')->with('success', 'Successfully delete file');
     }
+
+    public function show()
+    {
+        $files = Uploaded::with([
+            'user:id,fullname'
+        ])->get()->sortByDesc('upload_at');
+        // return $files;
+        return view('admin.filesubmitted', compact('files'));
+    }
 }

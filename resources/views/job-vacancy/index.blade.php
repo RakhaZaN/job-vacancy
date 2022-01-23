@@ -20,6 +20,7 @@
             @if (auth()->user()->role == 'admin')
             <div class="text-center mb-4">
                 <a href="{{ route('job-vacancy.new') }}" class="btn btn-success">New Vacancy</a>
+                <a href="{{ route('job-vacancy.submitted') }}" class="btn btn-outline-warning">All File Submitted</a>
             </div>
             @endif
             {{-- Alerts --}}
