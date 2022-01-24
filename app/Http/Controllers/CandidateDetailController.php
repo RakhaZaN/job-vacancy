@@ -9,16 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CandidateDetailController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $prev = url()->previous();
-        $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
-        if ($detail !== null) {
-            $detail['skills'] = json_decode($detail['skills'], false);
+        $detail = User::with('candidateDetail')
+        ->where('id', auth()->user()->id)->first();
+        if ($request->has('id')) {
+            $detail = User::with('candidateDetail')->find($request->id);
         }
+        if ($detail != null) {
+            $detail['candidateDetail']['skills'] = json_decode($detail['candidateDetail']['skills'], false);
+        }
+        // return $detail;
         return view('editprofile')
             ->with('prev', $prev)
-            ->with('candidate_detail', $detail);
+            ->with('candidate', $detail);
     }
 
     public function saveChange(Request $request)

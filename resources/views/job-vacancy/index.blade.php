@@ -135,6 +135,7 @@
                                 <th>Email</th>
                                 <th>Applied</th>
                                 <th>Job</th>
+                                <th>Profile</th>
                                 <th>Attachment</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -146,6 +147,9 @@
                                 <td>{{ $apply->candidate->email }}</td>
                                 <td>{{ $apply->jobVacancy->type->name }}</td>
                                 <td>{{ $apply->jobVacancy->title }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('edit-profile', ['id' => $apply->candidate_detail_id]) }}" class="btn btn-success btn-sm">Profile</a>
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ asset('storage/'.$apply->file_attach) }}" target="_blank" class="btn btn-warning btn-sm">view</a>
                                 </td>

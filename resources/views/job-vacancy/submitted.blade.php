@@ -27,6 +27,7 @@
                                             <th>Fullname</th>
                                             <th>Job Title</th>
                                             <th>status</th>
+                                            <th>Profile</th>
                                             <th>Attachment</th>
                                         </tr>
                                     </thead>
@@ -39,6 +40,7 @@
                                             <td><span class="badge @if ($app->status == 'send') badge-warning @else
                                             @if ($app->status == 'confirmed') badge-success @else badge-danger @endif
                                             @endif">{{ $app->status }}</span></td>
+                                            <td><a href="{{ route('edit-profile', ['id' => $app->candidate_detail_id]) }}" class="btn btn-success btn-sm">Profile</a></td>
                                             <td><a href="{{ asset('storage/'. $app->file_attach) }}" target="_blank" class="btn btn-warning btn-sm">view</a></td>
                                         </tr>
                                         @empty
