@@ -14,25 +14,26 @@ class UploadedController extends Controller
     {
         // $data = PurposeJob::where('job_vacancy_id', $request['j'])->where('candidate_detail_id', auth()->user()->id)->first();
         $data = Uploaded::where('user_id', auth()->user()->id)->get();
-        return view('job-vacancy.uploadfile')->with(['data' => $data, 'jobId' => $request['j']]);
+        $jobId = $request->has('j') ? $request->j : null;
+        return view('job-vacancy.uploadfile')->with(['data' => $data, 'jobId' => $jobId]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'filename' => 'file|mimes:pdf',
-            'upload_at' => 'required|date',
         ]);
-
+        $validated['user_id'] = auth()->user()->id;
+        $validated['upload_at'] = date('Y-m-d');
+        // return $validated;
 
         if ($request->file('filename')) {
             $validated['filename'] = $request->file('filename')->store('attachment');
         }
-        $validated['user_id'] = auth()->user()->id;
 
         Uploaded::create($validated);
 
-        return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['success' => 'Successfully upload file']);
+        return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['success' => 'Successfully upload file', 'selected' => $validated['filename']]);
     }
 
     public function destroy(Request $request)

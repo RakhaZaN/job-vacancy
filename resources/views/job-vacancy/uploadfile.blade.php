@@ -31,10 +31,10 @@
                                 <div class="form-group mb-3">
                                     <input type="hidden" name="jobId" value="{{ $jobId }}">
                                     <div class="input-group">
-                                        <input type="file" name="file_attach" id="file_attach" class="form-control @error('file_attach') is-invalid @enderror">
+                                        <input type="file" name="filename" id="filename" class="form-control @error('filename') is-invalid @enderror">
                                         <button class="btn btn-primary btn-lg" type="submit">Upload</button>
                                     </div>
-                                    @error('file_attach')
+                                    @error('filename')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -48,7 +48,9 @@
                                             <iframe src="{{ asset('storage/'. $file->filename) }}" class="w-100"></iframe>
                                             <div class="card-body d-flex justify-content-between">
                                                 <a href="{{ asset('storage/'. $file->filename) }}" target="_blank" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                                @if ($jobId != null)
                                                 <a href="{{ route('job-vacancy.data', ['j' => $jobId, 'selected' => $file->filename]) }}" class="btn btn-success">Select</a>
+                                                @endif
                                                 <form action="{{ route('job-vacancy.del-upload') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $file->id }}">

@@ -13,7 +13,7 @@
 
         <div class="section-body">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6 col-lg-6">
+                <div class="col-12 col-md-10">
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">

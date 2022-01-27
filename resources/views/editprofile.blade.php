@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('page')
-    Edit Profile
+    Profile
 @endsection
 
 @section('main-content')
