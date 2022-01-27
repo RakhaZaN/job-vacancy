@@ -23,6 +23,11 @@
                                         <div class="form-group">
                                             <label for="active_date" class="col-form-label">Active Date</label>
                                             <input type="date" name="active_date" id="active_date" class="form-control @error('active_date') is-invalid @enderror" value="{{ old('active_date') }}">
+                                            @error('title')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-4 offset-2 offset-md-4">

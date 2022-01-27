@@ -17,7 +17,7 @@
                 <div class="row justify-content-center">
 
                     <div class="col-12 col-md-8">
-                        <a href="{{ url()->previous() }}" class="btn btn-light mb-3">Back</a>
+                        <a href="{{ route('job-vacancy.index') }}" class="btn btn-light mb-3">Back</a>
                         <div class="card">
                             <div class="card-body">
                                 <table class="table table-stripes table-responsive-sm">

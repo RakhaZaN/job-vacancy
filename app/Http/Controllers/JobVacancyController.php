@@ -18,12 +18,17 @@ class JobVacancyController extends Controller
         if ($request->type == 'Internship') {
             return redirect()->route('job-vacancy.data', ['type' => $request->type, 'j' => 1]);
         }
-        $jobs = JobType::where('name', $request->type)
-            ->with(['jobList'])
+        $jobs = JobType::with([
+            'jobList' => function ($q) {
+                $q->whereDate('active_date', '>=', date('Y-m-d'))
+                ->orderBy('active_date');
+            }])
+            ->where('name', $request->type)
             ->first();
-        if ($jobs == null) {
-            return redirect(route('job-vacancy.index'));
-        }
+
+        // if ($jobs == null) {
+        //     return redirect(route('job-vacancy.index'));
+        // }
         // return $jobs;
         return view('job-vacancy.joblist')
             ->with('jobs', $jobs);
@@ -50,7 +55,7 @@ class JobVacancyController extends Controller
         $validated = $request->validate([
             'type_id' => 'required|in:2,3',
             'title' => 'required|max:50',
-            'active_date' => 'required|date',
+            'active_date' => 'required|date|after_or_equal:tomorrow',
             'location' => 'required',
             'major' => 'required',
             'employment_type' => 'required|in:contract,regular',

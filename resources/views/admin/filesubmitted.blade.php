@@ -20,7 +20,8 @@
                 </div>
             @endif
             {{-- End Alerts --}}
-            <div class="row justify-content-center">
+            <a href="{{ url()->previous() }}" class="btn btn-light mb-3">Back</a>
+            <div class="row">
 
                 @forelse ($files as $file)
                 <div class="col-6 col-md-3">

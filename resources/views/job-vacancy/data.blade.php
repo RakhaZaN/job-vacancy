@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-
+                    @if (auth()->user()->role != 'admin')
                     <div class="col-12 col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
@@ -114,7 +114,11 @@
                     <input type="hidden" name="job_vacancy_id" value="{{ $jobId }}">
                     <input type="hidden" name="candidate_detail_id" value="{{ auth()->user()->id }}">
                     <input type="hidden" name="file_attach" value="{{ $pathFile }}">
-
+                    @else
+                    <div class="col-12 col-md-8">
+                        <a href="{{ route('job-vacancy.index') }}" class="btn btn-light ml-2">Cancel</a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </section>

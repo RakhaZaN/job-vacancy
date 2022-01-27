@@ -12,6 +12,7 @@
         </div>
 
         <div class="section-body">
+            <a href="{{ route('job-vacancy.index') }}" class="btn btn-light mb-3">Back</a>
             <h5>List of available jobs</h5>
             <div class="d-flex flex-column justify-content-center">
 
