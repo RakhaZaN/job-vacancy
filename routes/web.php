@@ -8,7 +8,6 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PurposeJobController;
 use App\Http\Controllers\UploadedController;
 use App\Http\Controllers\UserController;
-use App\Models\PurposeJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +62,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/edit-profile', [CandidateDetailController::class, 'index'])->name('edit-profile');
     Route::post('/save-profile', [CandidateDetailController::class, 'saveChange'])->name('saveProfile');
+
     Route::group([
         'as' => 'job-vacancy.',
         'prefix' => 'job-vacancy'
@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/upload-file', [UploadedController::class, 'store'])->name('upload');
         Route::post('/delete-upload', [UploadedController::class, 'destroy'])->name('del-upload');
         Route::get('/submitted-file', [UploadedController::class, 'show'])->name('submitted');
+        Route::get('/myfile', [UploadedController::class, 'list'])->name('myfile');
 
         Route::get('/new', [JobVacancyController::class, 'create'])->name('new');
         Route::post('/store', [JobVacancyController::class, 'store'])->name('store');

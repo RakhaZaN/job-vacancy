@@ -33,6 +33,10 @@ class UploadedController extends Controller
 
         Uploaded::create($validated);
 
+        if ($request->has('back')) {
+            return back()->with('success', 'Successfully upload file');
+        }
+
         return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['success' => 'Successfully upload file', 'selected' => $validated['filename']]);
     }
 
@@ -57,5 +61,12 @@ class UploadedController extends Controller
         ])->get()->sortByDesc('upload_at');
         // return $files;
         return view('admin.filesubmitted', compact('files'));
+    }
+
+    public function list()
+    {
+        $files = Uploaded::where('user_id', auth()->user()->id)->get();
+
+        return view('myfile', compact('files'));
     }
 }

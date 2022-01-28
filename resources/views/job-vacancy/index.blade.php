@@ -22,6 +22,10 @@
                 <a href="{{ route('job-vacancy.new') }}" class="btn btn-success">New Vacancy</a>
                 <a href="{{ route('job-vacancy.submitted') }}" class="btn btn-outline-warning">All File Submitted</a>
             </div>
+            @else
+            <div class="text-center mb-4">
+                <a href="{{ route('job-vacancy.myfile') }}" class="btn btn-success">My Files</a>
+            </div>
             @endif
             {{-- Alerts --}}
             @if (session()->has('success'))
