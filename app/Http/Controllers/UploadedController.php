@@ -21,7 +21,7 @@ class UploadedController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'filename' => 'file|mimes:pdf',
+            'filename' => 'required|file|mimes:pdf',
         ]);
         $validated['user_id'] = auth()->user()->id;
         $validated['upload_at'] = date('Y-m-d');
@@ -51,7 +51,7 @@ class UploadedController extends Controller
         Uploaded::destroy($validated['id']);
         PurposeJob::where('file_attach', $upload->filename)->update(['file_attach' => null]);
 
-        return redirect()->route('job-vacancy.upload-file')->with('success', 'Successfully delete file');
+        return back()->with('success', 'Successfully delete file');
     }
 
     public function show()

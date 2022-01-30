@@ -94,12 +94,14 @@
                                         @error('file_attach')
                                         <span class="text-danger">Select your file before apply</span>
                                         @enderror
+                                        @if ($pathFile != null)
                                         <div class="card card-warning mt-3">
                                             <div class="card-body">
                                                 <h6 class="card-title">Selected File</h6>
                                                 <iframe src="{{ asset('storage/'. $pathFile) }}" frameborder="0"></iframe>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

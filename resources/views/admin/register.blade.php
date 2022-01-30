@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
 @section('page')
-    Job Vacancy
+    New Admin
 @endsection
 
 @section('main-content')
 
     <section class="section">
         <div class="section-header justify-content-between">
-            <h1>Job Vacancy</h1>
+            <h1>New Admin</h1>
         </div>
 
         <div class="section-body">
@@ -61,7 +61,7 @@
                             </div>
                             <input type="hidden" name="role" value="admin">
                             <div class="card-footer text-right">
-                                <a href="{{ route('home') }}" class="btn btn-light btn-lg mr-3">Cancel</a>
+                                {{-- <a href="{{ route('home') }}" class="btn btn-light btn-lg mr-3">Cancel</a> --}}
                                 <button type="submit" class="btn btn-primary btn-lg">Register</button>
                             </div>
                         </div>

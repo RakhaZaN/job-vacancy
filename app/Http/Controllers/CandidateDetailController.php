@@ -17,7 +17,7 @@ class CandidateDetailController extends Controller
         if ($request->has('id')) {
             $detail = User::with('candidateDetail')->find($request->id);
         }
-        if ($detail != null) {
+        if ($detail['candidateDetail'] != null) {
             $detail['candidateDetail']['skills'] = json_decode($detail['candidateDetail']['skills'], false);
         }
         // return $detail;

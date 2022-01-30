@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <a href="/home" class="btn btn-light btn-lg mr-3">Cancel</a>
+                                <a href="{{ route('job-vacancy.index') }}" class="btn btn-light btn-lg mr-3">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Publish</button>
                             </div>
                             <input type="hidden" name="purpose_job_id" value="{{ $pj }}">

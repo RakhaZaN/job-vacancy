@@ -63,6 +63,7 @@
                                         <td>{{ $file->upload_at }}</td>
                                         <td width="200">
                                             <form action="{{ route('job-vacancy.del-upload') }}" method="POST">
+                                                @csrf
                                                 <a href="{{ asset('storage/'. $file->filename) }}" target="_blank" class="btn btn-warning btn-sm">View</a>
                                                 <input type="hidden" name="id" value="{{ $file->id }}">
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
