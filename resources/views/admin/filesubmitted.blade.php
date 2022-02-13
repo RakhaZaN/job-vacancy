@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('page')
-    Job Vacancy
+    File Submitted
 @endsection
 
 @section('main-content')

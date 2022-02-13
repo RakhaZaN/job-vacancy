@@ -6,8 +6,10 @@ use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PurposeJobController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UploadedController;
 use App\Http\Controllers\UserController;
+use App\Models\PurposeJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,5 +97,17 @@ Route::middleware('auth')->group(function() {
             Route::post('/announcement', [AnnouncementController::class, 'save'])->name('post.announce');
             Route::get('/news-event', [NewsController::class, 'create'])->name('news');
             Route::post('/news-event', [NewsController::class, 'store'])->name('store-news');
+
+            Route::group([
+                'as' => 'report.',
+                'prefix' => '/report'
+            ], function () {
+                Route::get('/', [ReportController::class, 'index'])->name('index');
+                Route::get('/add', [ReportController::class, 'create'])->name('add');
+                Route::post('/store', [ReportController::class, 'store'])->name('store');
+                Route::get('/download', [ReportController::class, 'generatePDF']);
+            });
+
     });
+
 });

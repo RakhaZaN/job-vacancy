@@ -32,6 +32,9 @@
             </li>
             @endif
             @if (auth()->user()->role == 'admin')
+            <li class="nav-item dropdown {{ Request::routeIs('admin.report') ? 'active': '' }}">
+                <a class="nav-link" href="{{ route('admin.report.index') }}"><i class="fas fa-file-alt"></i> <span>Report</span></a>
+            </li>
             <li class="nav-item dropdown {{ Request::routeIs('admin.register') ? 'active': '' }}">
                 <a class="nav-link" href="{{ route('admin.register') }}"><i class="fas fa-users"></i> <span>Add Admin</span></a>
             </li>

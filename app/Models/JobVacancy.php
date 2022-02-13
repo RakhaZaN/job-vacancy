@@ -23,4 +23,9 @@ class JobVacancy extends Model
         return $this->hasMany(PurposeJob::class, 'job_vacancy_id');
     }
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'job_vacancy_id');
+    }
+
 }
