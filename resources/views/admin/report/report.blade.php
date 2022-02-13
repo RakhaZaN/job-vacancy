@@ -51,26 +51,26 @@
                                         <th>Accepted</th>
                                         <th>Rejected</th>
                                         <th>Description</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for ($i = 0; $i < count($month); $i++)
                                     <tr>
-                                        <td>{{ $month[$i] }}</td>
-                                        @foreach ($data as $report)
-                                        @if ($report->month == $i + 1)
+                                        <th colspan="6"><a href="#" class="btn btn-sm btn-success mr-3"><i class="fas fa-arrow-circle-down"></i></a> {{ $month[$i] }}</th>
+                                    </tr>
+                                    @foreach ($data as $report)
+                                    @if ($report->month == $i + 1)
+                                    <tr>
+                                        <td></td>
                                         <td>{{ $report->jobVacancy->title }}</td>
                                         <td>{{ $report->count_applicants }}</td>
                                         <td>{{ $report->accepted }}</td>
                                         <td>{{ $report->rejected }}</td>
                                         <td>{{ $report->description }}</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-success"><i class="fas fa-arrow-circle-down"></i></a>
-                                        </td>
-                                        @endif
-                                        @endforeach
                                     </tr>
+                                    @endif
+                                    @endforeach
                                     @endfor
                                 </tbody>
                             </table>
