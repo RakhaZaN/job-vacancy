@@ -57,7 +57,7 @@
                                 <tbody>
                                     @for ($i = 0; $i < count($month); $i++)
                                     <tr>
-                                        <th colspan="6"><a href="#" class="btn btn-sm btn-success mr-3"><i class="fas fa-arrow-circle-down"></i></a> {{ $month[$i] }}</th>
+                                        <th colspan="6"><a href="{{ route('admin.report.download') }}" class="btn btn-sm btn-success mr-3"><i class="fas fa-arrow-circle-down"></i></a> {{ $month[$i] }}</th>
                                     </tr>
                                     @foreach ($data as $report)
                                     @if ($report->month == $i + 1)

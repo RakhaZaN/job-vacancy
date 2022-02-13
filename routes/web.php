@@ -105,7 +105,7 @@ Route::middleware('auth')->group(function() {
                 Route::get('/', [ReportController::class, 'index'])->name('index');
                 Route::get('/add', [ReportController::class, 'create'])->name('add');
                 Route::post('/store', [ReportController::class, 'store'])->name('store');
-                Route::get('/download', [ReportController::class, 'generatePDF']);
+                Route::get('/download', [ReportController::class, 'generatePDF'])->name('download');
             });
 
     });

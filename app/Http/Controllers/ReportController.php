@@ -6,6 +6,7 @@ use App\Models\JobVacancy;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
@@ -22,7 +23,7 @@ class ReportController extends Controller
         ])
         ->where('year', $selected_year)
         ->get();
-
+        // dd($data, $selected_year);
         foreach ($data as $val) {
             $acc = 0;
             foreach ($val->applicants as $value) {
@@ -65,7 +66,9 @@ class ReportController extends Controller
 
     public function generatePDF(Request $request)
     {
-        return $request->all();
+        $pdf = PDF::loadView('admin.report.monthly_report_view');
+        return $pdf->download('report_monthly.pdf');
+        return view('admin.report.monthly_report_view');
     }
 
     private function getYear()
