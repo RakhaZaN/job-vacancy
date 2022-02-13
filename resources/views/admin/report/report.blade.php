@@ -57,7 +57,7 @@
                                 <tbody>
                                     @for ($i = 0; $i < count($month); $i++)
                                     <tr>
-                                        <th colspan="6"><a href="{{ route('admin.report.download') }}" class="btn btn-sm btn-success mr-3"><i class="fas fa-arrow-circle-down"></i></a> {{ $month[$i] }}</th>
+                                        <th colspan="6"><a href="{{ route('admin.report.download', ['year' => $selected_year, 'month' => $i+1]) }}" class="btn btn-sm btn-success mr-3"><i class="fas fa-arrow-circle-down"></i></a> {{ $month[$i] }}</th>
                                     </tr>
                                     @foreach ($data as $report)
                                     @if ($report->month == $i + 1)
@@ -77,11 +77,21 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="#" class="btn btn-outline-primary btn-lg"><i class="fas fa-arrow-circle-down"></i> All</a>
+                        <a href="{{ route('admin.report.download', ['year' => $selected_year]) }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-arrow-circle-down"></i> All</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+@endsection
+
+@section('script-page')
+<script>
+    $(document).ready(function () {
+        $('#year').change(function () {
+            location.href = '/admin/report?year='+ this.value
+        })
+    })
+</script>
 @endsection

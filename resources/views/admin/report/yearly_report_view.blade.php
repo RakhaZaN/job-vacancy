@@ -32,11 +32,12 @@
 <body>
     <center>
         <img src="{{ asset('assets/img/logo bsg.jpg') }}" alt="logo" style="margin: 10px 0;">
-        <h1>Report on {{ $year }} {{ $month }}</h1>
+        <h1>Report on {{ $year }}</h1>
     </center>
     <table>
         <thead>
             <tr>
+                <th>Month</th>
                 <th>Division / Departement</th>
                 <th>Applies</th>
                 <th>Accepted</th>
@@ -45,15 +46,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $dt)
+            @for ($i = 0; $i < count($month); $i++)
             <tr>
+                <td colspan="6"><b>{{ $month[$i] }}</b></td>
+            </tr>
+            @foreach ($data as $dt)
+            @if ($dt->month == $i + 1)
+            <tr>
+                <td></td>
                 <td>{{ $dt->jobVacancy->title }}</td>
                 <td class="text-center">{{ $dt->count_applicants }}</td>
                 <td class="text-center">{{ $dt->accepted }}</td>
                 <td class="text-center">{{ $dt->rejected }}</td>
                 <td>{{ $dt->description }}</td>
             </tr>
+            @endif
             @endforeach
+            @endfor
         </tbody>
     </table>
 </body>
