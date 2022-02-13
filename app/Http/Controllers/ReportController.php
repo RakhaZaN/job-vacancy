@@ -63,15 +63,15 @@ class ReportController extends Controller
         $month = $request->has('month') ? $request['month'] : null;
         $data = $this->getData($year, $month);
         // return $data;
-        if ($month == null) {
+        if (!$request->has('month')) {
             $month = $this->getMonth();
             $pdf = PDF::loadView('admin.report.yearly_report_view', compact('data', 'year', 'month'));
-            return $pdf->download('report_{$year}.pdf');
+            return $pdf->download('report_'.$year.'.pdf');
             // return view('admin.report.yearly_report_view', compact('data', 'year', 'month'));
         }
         $month = $this->getMonth(number_format($month) - 1);
         $pdf = PDF::loadView('admin.report.monthly_report_view', compact('data', 'year', 'month'));
-        return $pdf->download('report_{$year}_{$month}.pdf');
+        return $pdf->download('report_'.$year.'_'.$month.'.pdf');
         // return view('admin.report.monthly_report_view', compact('data', 'year', 'month'));
     }
 
@@ -108,10 +108,10 @@ class ReportController extends Controller
         ->orderByDesc('year')->get();
     }
 
-    private function getMonth($m = null)
+    private function getMonth($m = '')
     {
         $month = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', ' December'];
-        return $m == null ? $month : $month[$m];
+        return $m == '' ? $month : $month[$m];
     }
 
     private function getDivision()
