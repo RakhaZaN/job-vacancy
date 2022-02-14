@@ -43,6 +43,16 @@ class ReportController extends Controller
         return view('admin.report.add', compact('years', 'divisions'));
     }
 
+    public function update(Request $request)
+    {
+        $data = Report::with([
+            'jobVacancy:id,title',
+        ])->find($request['id']);
+        $data['month_name'] = $this->getMonth(number_format($data['month'] - 1));
+        // return $data;
+        return view('admin.report.edit', compact('data'));
+    }
+
     public function store(Request $request)
     {
         // return $request->all();
@@ -55,6 +65,13 @@ class ReportController extends Controller
         Report::updateOrCreate(['job_vacancy_id' => $request['job_vacancy_id']], $validate);
 
         return redirect()->route('admin.report.index')->with('success', 'Success add new report');
+    }
+
+    public function destroy(Request $request)
+    {
+        Report::find($request->id)->delete();
+
+        return redirect($request->prev)->with('success', 'Successfully delete report');
     }
 
     public function generatePDF(Request $request)
