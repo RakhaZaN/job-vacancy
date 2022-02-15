@@ -23,7 +23,7 @@
                                         <label for="year">Year</label>
                                     </div>
                                     <div class="col">
-                                        <select name="year" id="year" class="form-control selectric">
+                                        <select name="year" id="year" class="form-control selectric" required>
                                             {{-- <option value="2021">2021</option> --}}
                                             @forelse ($years as $year)
                                             @if ($year->year != null)
@@ -40,7 +40,7 @@
                                         <label for="month">Month</label>
                                     </div>
                                     <div class="col">
-                                        <select name="month" id="month" class="form-control selectric">
+                                        <select name="month" id="month" class="form-control selectric" required>
                                             <option value="1">January</option>
                                             <option value="2">February</option>
                                             <option value="3">March</option>
@@ -61,7 +61,7 @@
                                         <label for="division">Division / Departement</label>
                                     </div>
                                     <div class="col">
-                                        <select name="job_vacancy_id" id="division" class="form-control selectric">
+                                        <select name="job_vacancy_id" id="division" class="form-control selectric" required>
                                             <option disabled selected>Select division / departement</option>
                                         </select>
                                     </div>
