@@ -37,7 +37,7 @@ class UploadedController extends Controller
             return back()->with('success', 'Successfully upload file');
         }
 
-        return redirect()->route('job-vacancy.data', ['j' => $request['jobId']])->with(['success' => 'Successfully upload file', 'selected' => $validated['filename']]);
+        return redirect()->route('job-vacancy.data', ['j' => $request['jobId'], 'selected' => $validated['filename']])->with(['success' => 'Successfully upload file']);
     }
 
     public function destroy(Request $request)
@@ -68,5 +68,16 @@ class UploadedController extends Controller
         $files = Uploaded::where('user_id', auth()->user()->id)->get();
 
         return view('myfile', compact('files'));
+    }
+
+    public function rename(Request $request)
+    {
+
+        $filename = 'attachment/' . date('YmdHis') . '-' . $request->filename . '.pdf';
+        Uploaded::find($request->id)->update(['filename' => $filename]);
+        $attachs = PurposeJob::where('file_attach', $request['old-name'])->update(['file_attach' => $filename]);
+        Storage::copy($request['old-name'], $filename);
+        Storage::delete($request['old-name']);
+        return back()->with('success', 'Successfully rename file');
     }
 }

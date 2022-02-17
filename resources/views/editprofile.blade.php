@@ -29,7 +29,6 @@
                     <div class="col offset-md-1">
                         <a href="{{ session()->has('prev') ? session('prev') : $prev }}" class="btn btn-light mr-2">Back</a>
                         @if (auth()->user()->role != 'admin')
-                        <button type="submit" class="btn btn-primary">Save Change</button>
                         <input @if (auth()->user()->role == 'admin') readonly @endif type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
                         @endif
                     </div>
@@ -135,7 +134,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="phone" class="form-label">Phone</label>
-                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->phone : old('phonr') }}" placeholder="Phone number">
+                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->phone : old('phone') }}" placeholder="Phone number">
                                             @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -146,7 +145,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="post_code" class="form-label"></label>
-                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="number" class="form-control @error('post_code') is-invalid @enderror" name="post_code" id="post_code" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->post_code : old('post_code') }}" placeholder="Post code">
+                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="text" class="form-control @error('post_code') is-invalid @enderror" name="post_code" id="post_code" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->post_code : old('post_code') }}" placeholder="Post code">
                                             @error('post_code')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -323,7 +322,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="we_description" class="form-label">Description</label>
-                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="text" class="form-control @error('we_description') is-invalid @enderror" name="we_description" id="we_description" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->we_description : old('we_description') }}" placeholder="we_description">
+                                            <input @if (auth()->user()->role == 'admin') readonly @endif type="text" class="form-control @error('we_description') is-invalid @enderror" name="we_description" id="we_description" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->we_description : old('we_description') }}" placeholder="description">
                                             @error('we_description')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

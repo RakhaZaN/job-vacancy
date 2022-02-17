@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('page')
-    Job Vacancy
+    News & Event
 @endsection
 
 @section('main-content')
@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <div class="row mb-4">
                                     <div class="col-12 col-md-4">
-                                        <input type="date" name="post_date" id="date" class="form-control" readonly value="{{ date('Y-m-d') }}">
+                                        <input type="date" name="post_date" id="date" class="form-control" value="{{ date('Y-m-d') }}">
                                     </div>
                                     <div class="col offset-md-1">
                                         <div class="form-group row">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <a href="/home" class="btn btn-light btn-lg mr-3">Cancel</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-light btn-lg mr-3">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Publish</button>
                             </div>
                         </div>

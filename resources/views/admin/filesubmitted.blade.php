@@ -28,6 +28,7 @@
                     <div class="card">
                         <div class="card-body">
                             <iframe class="w-100" src="{{ asset('storage/'.$file->filename) }}" frameborder="0"></iframe>
+                            <a href="{{ asset('storage/'.$file->filename) }}" class="btn btn-sm btn-info mr-3" target="_blank"><i class="fas fa-eye"></i></a>
                             <small>{{ $file->user->fullname }} - {{ $file->upload_at }}</small>
                         </div>
                     </div>

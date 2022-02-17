@@ -91,7 +91,7 @@
 <script>
     $(document).ready(function () {
         $('#year').change(function () {
-            location.href = '/admin/report?year='+ this.value
+            location.href = '?year='+ this.value
         })
     })
 </script>

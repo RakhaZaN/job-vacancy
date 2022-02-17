@@ -112,7 +112,7 @@
                             </div>
                             <input type="hidden" name="id" id="id" value="{{ $job->id }}">
                             <div class="card-footer text-right">
-                                <a href="{{ url('/home') }}" class="btn btn-light btn-lg mr-3">Cancel</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-light btn-lg mr-3">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Update</button>
                             </div>
                         </div>

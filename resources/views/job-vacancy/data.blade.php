@@ -25,13 +25,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-3 align-self-center">
-                                        <img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="ava" class="w-100">
-                                    </div>
                                     <div class="col">
                                         <h1>{{ auth()->user()->fullname }}</h1>
-                                        <p><i class="fas fa-envelope"></i> {{ auth()->user()->email }}</p>
                                         @if (auth()->user()->role != 'admin')
+                                        <p><i class="fas fa-envelope"></i> {{ auth()->user()->email }}</p>
                                         <p><i class="fas fa-map-marker-alt"></i> @if ($detail != null) {{ $detail->address }} {{ $detail->city }}, {{ $detail->provincy }} @endif</p>
                                         <p><i class="fas fa-phone"></i>@if ($detail != null) {{ $detail->phone }} @endif</p>
                                         @endif
@@ -46,7 +43,6 @@
                         </div>
                     </div>
 
-                    @if (auth()->user()->role != 'admin')
                     <div class="col-12 col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
@@ -70,6 +66,7 @@
                                         2. Please upload your internship application letter
                                         @endif
                                     </div>
+                                    @if (auth()->user()->role != 'admin')
                                     <div class="card-footer">
                                         @if ($jobId != 1)
                                         <h6>Upload CV / Resume</h6>
@@ -103,11 +100,13 @@
                                         </div>
                                         @endif
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    @if (auth()->user()->role != 'admin')
                     <div class="col-12 col-md-8">
                         <a href="{{ route('job-vacancy.index') }}" class="btn btn-light ml-2">Cancel</a>
                         <button class="btn btn-primary btn-lg" type="submit">APPlY</button>

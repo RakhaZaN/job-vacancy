@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/delete-upload', [UploadedController::class, 'destroy'])->name('del-upload');
         Route::get('/submitted-file', [UploadedController::class, 'show'])->name('submitted');
         Route::get('/myfile', [UploadedController::class, 'list'])->name('myfile');
+        Route::post('/rename-file', [UploadedController::class, 'rename'])->name('rename');
 
         Route::get('/new', [JobVacancyController::class, 'create'])->name('new');
         Route::post('/store', [JobVacancyController::class, 'store'])->name('store');
