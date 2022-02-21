@@ -169,7 +169,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="edu_level" class="form-label">Level</label>
-                                            <select @if (auth()->user()->role == 'admin') readonly @endif class="form-control mb-3" name="edu_level" id="edu_level">
+                                            <select @if (auth()->user()->role == 'admin') disabled @endif class="form-control mb-3" name="edu_level" id="edu_level">
                                                 <option value="undergraduate" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_level == 'undergraduate') selected @endif>Undergraduate</option>
                                                 <option value="hs" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_level == 'hs') selected @endif>Graduate from High School</option>
                                                 <option value="collage" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_level == 'collage') selected @endif>Graduate from Collage</option>
@@ -184,7 +184,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="degree" class="form-label">Degree</label>
-                                            <select @if (auth()->user()->role == 'admin') readonly @endif class="form-control mb-3" name="edu_degree" id="degree">
+                                            <select @if (auth()->user()->role == 'admin') disabled @endif class="form-control mb-3" name="edu_degree" id="degree">
                                                 <option value="sma" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_degree == 'sma') selected @endif>SMA / SMK</option>
                                                 <option value="d1" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_degree == 'd1') selected @endif>Associate (Diploma) I</option>
                                                 <option value="d2" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_degree == 'd2') selected @endif>Associate (Diploma) II</option>
@@ -304,7 +304,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="we_job_level" class="form-label">Level</label>
-                                            <select @if (auth()->user()->role == 'admin') readonly @endif class="form-control mb-3" name="we_job_level" id="we_job_level">
+                                            <select @if (auth()->user()->role == 'admin') disabled @endif class="form-control mb-3" name="we_job_level" id="we_job_level">
                                                 <option value="">Select @if (auth()->user()->role == 'admin') readonly @endif Your Position</option>
                                                 <option value="entry" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->we_job_level == 'entry') selected @endif>Entry / Fresh Graduate</option>
                                                 <option value="officer" @if ($candidate->candidateDetail != null && $candidate->candidateDetail->we_job_level == 'officer') selected @endif>Officer / Stuff</option>
@@ -356,7 +356,7 @@
                                         <input @if (auth()->user()->role == 'admin') readonly @endif class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill" value="{{ $candidate->candidateDetail->skills[$i][0] }}">
                                     </div>
                                     <div class="col-5">
-                                        <select @if (auth()->user()->role == 'admin') readonly @endif class="form-control" name="skill_level[]" id="skill_lavel">
+                                        <select @if (auth()->user()->role == 'admin') disabled @endif class="form-control" name="skill_level[]" id="skill_lavel">
                                             <option value="basic" @if ($candidate->candidateDetail->skills[$i][1] == 'basic') selected @endif>Basic</option>
                                             <option value="intermediate" @if ($candidate->candidateDetail->skills[$i][1] == 'intermediate') selected @endif>Intermediate</option>
                                             <option value="expert" @if ($candidate->candidateDetail->skills[$i][1] == 'expert') selected @endif>Expert</option>
@@ -411,7 +411,7 @@
             <input @if (auth()->user()->role == 'admin') readonly @endif class="form-control" type="text" name="skill_name[]" id="skill_name" placeholder="Add a skill" value="">
         </div>
         <div class="col-5">
-            <select @if (auth()->user()->role == 'admin') readonly @endif class="form-control" name="skill_level[]" id="skill_lavel">
+            <select @if (auth()->user()->role == 'admin') disabled @endif class="form-control" name="skill_level[]" id="skill_lavel">
                 <option value="basic">Basic</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="expert">Expert</option>
