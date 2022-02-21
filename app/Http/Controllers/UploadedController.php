@@ -47,6 +47,13 @@ class UploadedController extends Controller
         ]);
 
         $upload = Uploaded::find($validated['id']);
+
+        $used = PurposeJob::where('file_attach', $upload->filename)->get();
+        // return $used;
+        if (count($used) > 0) {
+            return back()->with('failed', 'Cannot delete this file, file used');
+        }
+
         Storage::delete($upload->filename);
         Uploaded::destroy($validated['id']);
         PurposeJob::where('file_attach', $upload->filename)->update(['file_attach' => null]);
