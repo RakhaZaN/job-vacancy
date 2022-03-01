@@ -17,15 +17,7 @@ class ReportController extends Controller
         $month = $this->getMonth();
         $data = $this->getData($selected_year);
         // dd($data, $selected_year);
-        foreach ($data as $val) {
-            $acc = 0;
-            foreach ($val->applicants as $value) {
-                $acc += $value->status == 'confirmed' ? 1 : 0;
-            };
-            $val['count_applicants'] = count($val['applicants']);
-            $val['accepted'] = $acc;
-            $val['rejected'] = $val['count_applicants'] - $val['accepted'];
-        }
+
         // $data = $data->groupBy('month');
         // return $data['1'];
 
@@ -108,12 +100,17 @@ class ReportController extends Controller
 
         foreach ($data as $val) {
             $acc = 0;
+            $rej = 0;
+            $pend = 0;
             foreach ($val->applicants as $value) {
                 $acc += $value->status == 'confirmed' ? 1 : 0;
+                $rej += $value->status == 'rejected' ? 1 : 0;
+                $pend += $value->status == 'send' ? 1 : 0;
             };
             $val['count_applicants'] = count($val['applicants']);
             $val['accepted'] = $acc;
-            $val['rejected'] = $val['count_applicants'] - $val['accepted'];
+            $val['rejected'] = $rej;
+            $val['pending'] = $pend;
         }
 
         return $data;

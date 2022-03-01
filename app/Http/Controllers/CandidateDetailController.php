@@ -58,11 +58,14 @@ class CandidateDetailController extends Controller
             'we_job_level' => 'sometimes|nullable|in:director,senior,supervisor,officer,entry',
         ]);
 
-        for ($i=0; $i < count($request['skill_name']); $i++) {
-            $candidateValidated['skills'][$i][0] = $request['skill_name'][$i];
-            $candidateValidated['skills'][$i][1] = $request['skill_level'][$i];
+        if ($request['skill_name'] != null) {
+            for ($i=0; $i < count($request['skill_name']); $i++) {
+                $candidateValidated['skills'][$i][0] = $request['skill_name'][$i];
+                $candidateValidated['skills'][$i][1] = $request['skill_level'][$i];
+            }
+            $candidateValidated['skills'] = json_encode($candidateValidated['skills']);
         }
-        $candidateValidated['skills'] = json_encode($candidateValidated['skills']);
+        // return $candidateValidated;
 
         CandidateDetail::updateOrCreate(['user_id' => $userId], $candidateValidated);
 

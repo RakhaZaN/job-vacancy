@@ -50,6 +50,7 @@
                                         <th>Applies</th>
                                         <th>Accepted</th>
                                         <th>Rejected</th>
+                                        <th>Pending</th>
                                         <th>Description</th>
                                         <th>Action</th>
                                     </tr>
@@ -67,6 +68,7 @@
                                         <td>{{ $report->count_applicants }}</td>
                                         <td>{{ $report->accepted }}</td>
                                         <td>{{ $report->rejected }}</td>
+                                        <td>{{ $report->pending }}</td>
                                         <td>{{ $report->description }}</td>
                                         <td><a href="{{ route('admin.report.edit', ['id' => $report->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a></td>
                                     </tr>

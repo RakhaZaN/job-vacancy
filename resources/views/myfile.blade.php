@@ -74,7 +74,7 @@
                                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#rename-{{ $file->id }}"><i class="fas fa-edit"></i></button>
                                                     <a href="{{ asset('storage/'. $file->filename) }}" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                                     <input type="hidden" name="id" value="{{ $file->id }}">
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                                    {{-- <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button> --}}
                                                 </form>
                                             </td>
                                         </tr>

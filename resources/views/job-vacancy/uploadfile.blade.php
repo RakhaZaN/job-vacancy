@@ -44,19 +44,14 @@
                         <h4 class="card-title">File Uploaded</h4>
                         <div class="row">
                             @forelse ($data as $file)
-                            <div class="col-6 col-md-3">
+                            <div class="col-6 col-md-4">
                                 <div class="card">
                                     <iframe src="{{ asset('storage/'. $file->filename) }}" class="w-100"></iframe>
-                                    <div class="card-body d-flex justify-content-between">
-                                        <a href="{{ asset('storage/'. $file->filename) }}" target="_blank" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                    <div class="card-body d-flex justify-content-center">
+                                        <a href="{{ asset('storage/'. $file->filename) }}" target="_blank" class="btn btn-warning btn-sm mr-2"><i class="fas fa-eye"></i></a>
                                         @if ($jobId != null)
-                                        <a href="{{ route('job-vacancy.data', ['j' => $jobId, 'selected' => $file->filename]) }}" class="btn btn-success">Select</a>
+                                        <a href="{{ route('job-vacancy.data', ['j' => $jobId, 'selected' => $file->filename]) }}" class="btn btn-success btn-sm">Select</a>
                                         @endif
-                                        <form action="{{ route('job-vacancy.del-upload') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $file->id }}">
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

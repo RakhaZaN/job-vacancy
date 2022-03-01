@@ -42,6 +42,7 @@
                 <th>Applies</th>
                 <th>Accepted</th>
                 <th>Rejected</th>
+                <th>Pending</th>
                 <th>Description</th>
             </tr>
         </thead>
@@ -58,6 +59,7 @@
                 <td class="text-center">{{ $dt->count_applicants }}</td>
                 <td class="text-center">{{ $dt->accepted }}</td>
                 <td class="text-center">{{ $dt->rejected }}</td>
+                <td class="text-center">{{ $dt->pending }}</td>
                 <td>{{ $dt->description }}</td>
             </tr>
             @endif
