@@ -61,7 +61,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="major" class="col-form-label">Major</label>
-                                    <input id="major" type="text" class="form-control @error('location') is-invalid @enderror" name="major" tabindex="1" required autofocus placeholder="Major" value="{{ old('major') }}">
+                                    <select name="major" id="major" class="form-control selectric">
+                                        <option value="All Major">All Major</option>
+                                        @foreach ($major as $m)
+                                        <option value="{{ $m }}">{{ $m }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input id="major" type="text" class="form-control @error('location') is-invalid @enderror" name="major" tabindex="1" required autofocus placeholder="Major" value="{{ old('major') }}"> --}}
                                     @error('major')
                                     <div class="invalid-feedback">
                                         {{ $message }}

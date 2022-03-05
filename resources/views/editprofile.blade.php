@@ -214,7 +214,13 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="major" class="form-label">Major</label>
-                                            <input @if (auth()->user()->role == 'admin') readonly @endif class="form-control mb-3 @error('edu_major') is-invalid @enderror" type="text" name="edu_major" id="major" placeholder="Major / Field of study" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->edu_major : old('edu_major') }}">
+                                            <select name="edu_major" id="major" class="form-control selectric" @if (auth()->user()->role == 'admin') selected @endif>
+                                                <option value="">Choose Your Major</option>
+                                                @foreach ($major as $m)
+                                                <option @if ($candidate->candidateDetail != null && $candidate->candidateDetail->edu_major == $m) selected @endif value="{{ $m }}">{{ $m }}</option>
+                                                @endforeach
+                                            </select>
+                                            {{-- <input @if (auth()->user()->role == 'admin') readonly @endif class="form-control mb-3 @error('edu_major') is-invalid @enderror" type="text" name="edu_major" id="major" placeholder="Major / Field of study" value="{{ $candidate->candidateDetail != null? $candidate->candidateDetail->edu_major : old('edu_major') }}"> --}}
                                             @error('edu_major')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
