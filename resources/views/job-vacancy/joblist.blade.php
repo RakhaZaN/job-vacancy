@@ -20,9 +20,19 @@
                     <p class="text-mute">Job vancancies not available</p>
                 @else
                     @foreach ($jobs->jobList as $job)
+                    @php
+                        $qualified = true;
+
+                        // age validatioin
+                        $age = explode('-', $job['range_age']);
+                        $qualified = $validation['age'] >= $age[0] && $validation['age'] <= $age[1];
+                    @endphp
                     <div class="card card-primary">
                         <div class="card-header">
                             <h4>{{ $job->title }}</h4>
+                            @if (!$qualified)
+                            <small class="text-danger">* You are not qualified</small>
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -72,6 +82,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Job Detail</h5>
+                    @if (!$qualified)
+                    <small class="text-danger">* You are not qualified</small>
+                    @endif
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,7 +136,9 @@
                     @if (auth()->user()->role == 'admin')
                     <a href="{{ route('job-vacancy.edit', ['j' => $job->id]) }}" class="btn btn-warning">Edit</a>
                     @else
+                    @if ($qualified)
                     <a href="{{ route('job-vacancy.data', ['j' => $job->id, 'type' => $jobs->name]) }}" class="btn btn-primary">APPLY THIS JOB</a>
+                    @endif
                     @endif
                     {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
                 </div>

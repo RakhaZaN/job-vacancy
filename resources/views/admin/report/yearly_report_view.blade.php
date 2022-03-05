@@ -49,7 +49,7 @@
         <tbody>
             @for ($i = 0; $i < count($month); $i++)
             <tr>
-                <td colspan="6"><b>{{ $month[$i] }}</b></td>
+                <td colspan="7"><b>{{ $month[$i] }}</b></td>
             </tr>
             @foreach ($data as $dt)
             @if ($dt->month == $i + 1)

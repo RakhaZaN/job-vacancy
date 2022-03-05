@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CandidateDetail;
 use App\Models\JobType;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
@@ -26,11 +27,22 @@ class JobVacancyController extends Controller
             ->where('name', $request->type)
             ->first();
 
+        $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
+        $validation['age'] = date('Y') - intval(explode('-', $detail['dob'])[0]);
+        $validation['position'] = $detail['we_job_level'];
+        $validation['education'] = $detail['edu_degree'];
+        $validation['major'] = $detail['edu_major'];
+        $validation['gender'] = $detail['gender'];
+
+        // return $detail;
+
+
         // if ($jobs == null) {
         //     return redirect(route('job-vacancy.index'));
         // }
         // return $jobs;
         return view('job-vacancy.joblist')
+            ->with('validation', $validation)
             ->with('jobs', $jobs);
     }
 
