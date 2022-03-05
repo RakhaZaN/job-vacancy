@@ -22,10 +22,39 @@
                     @foreach ($jobs->jobList as $job)
                     @php
                         $qualified = true;
-
                         // age validatioin
                         $age = explode('-', $job['range_age']);
-                        $qualified = $validation['age'] >= $age[0] && $validation['age'] <= $age[1];
+                        $qualifiedAge = $validation['age'] >= $age[0] && $validation['age'] <= $age[1];
+
+                        $isValidGender = $job['gender'] == $validation['gender'] || $job['gender'] == 'male/female';
+                        $qualifiedGender = $isValidGender;
+
+                        $level = [
+                            'entry',
+                            'officer',
+                            'supervisor',
+                            'senior',
+                            'director',    
+                        ];
+                        $levelCandidate = array_search($validation['position_level'] ?? 'entry', $level);
+                        $levelJob = array_search($job['position_level'], $level);
+                        $qualifiedPositionLevel = $levelCandidate >= $levelJob;
+
+                        $degrees = [
+                            'sma',
+                            'd1',
+                            'd2',
+                            'd3',
+                            's1',
+                            's2',
+                            's3',
+                        ];
+                        $degreeCandidate = array_search($validation['education'], $degrees);
+                        $degreeJob = array_search($job['education'], $degrees);
+                        $qualifiedDegree = $degreeCandidate >= $degreeJob;
+
+                        $qualified = $qualifiedAge && $qualifiedGender && $qualifiedPositionLevel && $qualifiedDegree;
+
                     @endphp
                     <div class="card card-primary">
                         <div class="card-header">

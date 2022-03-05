@@ -29,7 +29,7 @@ class JobVacancyController extends Controller
 
         $detail = CandidateDetail::where('user_id', auth()->user()->id)->first();
         $validation['age'] = date('Y') - intval(explode('-', $detail['dob'])[0]);
-        $validation['position'] = $detail['we_job_level'];
+        $validation['position_level'] = $detail['we_job_level'];
         $validation['education'] = $detail['edu_degree'];
         $validation['major'] = $detail['edu_major'];
         $validation['gender'] = $detail['gender'];
