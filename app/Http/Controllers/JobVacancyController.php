@@ -43,7 +43,8 @@ class JobVacancyController extends Controller
         // return $jobs;
         return view('job-vacancy.joblist')
             ->with('validation', $validation)
-            ->with('jobs', $jobs);
+            ->with('jobs', $jobs)
+            ->with('majors', $this->major());
     }
 
     /**
@@ -151,7 +152,18 @@ class JobVacancyController extends Controller
     public function major()
     {
         return [
-            "MBA / Master of Business Administration", "Finance", "Bussiness", "FinTech", "Economics", "Accounting", "Finnancial Engineering", "Physics / Engineering / Mathemathics", "Banking", "Computer Science / Information Technology", "International Bussiness", "Corporate / Bussiness Law"
+            "MBA / Master of Business Administration", 
+            "Finance", 
+            "Bussiness", 
+            "FinTech", 
+            "Economics", 
+            "Accounting", 
+            "Finnancial Engineering", 
+            "Physics / Engineering / Mathemathics", 
+            "Banking", 
+            "Computer Science / Information Technology", 
+            "International Bussiness", 
+            "Corporate / Bussiness Law"
         ];
     }
 }

@@ -53,7 +53,13 @@
                         $degreeJob = array_search($job['education'], $degrees);
                         $qualifiedDegree = $degreeCandidate >= $degreeJob;
 
-                        $qualified = $qualifiedAge && $qualifiedGender && $qualifiedPositionLevel && $qualifiedDegree;
+                        $qualifiedMajor = $validation['major'] ==  $job['major'];
+
+                        $qualified = $qualifiedAge && 
+                                    $qualifiedGender && 
+                                    $qualifiedPositionLevel && 
+                                    $qualifiedDegree &&
+                                    $qualifiedMajor;
 
                     @endphp
                     <div class="card card-primary">

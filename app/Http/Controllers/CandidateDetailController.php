@@ -79,7 +79,18 @@ class CandidateDetailController extends Controller
     public function major()
     {
         return [
-            "MBA / Master of Business Administration", "Finance", "Bussiness", "FinTech", "Economics", "Accounting", "Finnancial Engineering", "Physics / Engineering / Mathemathics", "Banking", "Computer Science / Information Technology", "International Bussiness", "Corporate / Bussiness Law"
+            "MBA / Master of Business Administration", 
+            "Finance", 
+            "Bussiness", 
+            "FinTech", 
+            "Economics", 
+            "Accounting", 
+            "Finnancial Engineering", 
+            "Physics / Engineering / Mathemathics", 
+            "Banking", 
+            "Computer Science / Information Technology", 
+            "International Bussiness", 
+            "Corporate / Bussiness Law"
         ];
     }
 }
