@@ -53,7 +53,8 @@ class JobVacancyController extends Controller
      */
     public function create()
     {
-        return view('admin.job-vacancy.add');
+        $major = $this->major();
+        return view('admin.job-vacancy.add', compact('major'));
     }
 
     /**
@@ -103,7 +104,9 @@ class JobVacancyController extends Controller
      */
     public function edit(JobVacancy $jobVacancy, Request $request)
     {
+        $major = $this->major();
         return view('admin.job-vacancy.edit')
+        ->with('major', $major)
         ->with('job', $jobVacancy->where('id', $request->j)->first());
     }
 
@@ -143,5 +146,12 @@ class JobVacancyController extends Controller
     public function destroy(JobVacancy $jobVacancy)
     {
         //
+    }
+
+    public function major()
+    {
+        return [
+            "MBA / Master of Business Administration", "Finance", "Bussiness", "FinTech", "Economics", "Accounting", "Finnancial Engineering", "Physics / Engineering / Mathemathics", "Banking", "Computer Science / Information Technology", "International Bussiness", "Corporate / Bussiness Law"
+        ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CandidateDetail;
+use App\Models\JobVacancy;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,12 @@ class CandidateDetailController extends Controller
         if ($detail['candidateDetail'] != null) {
             $detail['candidateDetail']['skills'] = json_decode($detail['candidateDetail']['skills'], false);
         }
+
+        $major = $this->major();
         // return $detail;
         return view('editprofile')
             ->with('prev', $prev)
+            ->with('major', $major)
             ->with('candidate', $detail);
     }
 
@@ -70,5 +74,12 @@ class CandidateDetailController extends Controller
         CandidateDetail::updateOrCreate(['user_id' => $userId], $candidateValidated);
 
         return back()->with(['success' => 'Successfuly saved changes !', 'prev' => $request->previous_url]);
+    }
+
+    public function major()
+    {
+        return [
+            "MBA / Master of Business Administration", "Finance", "Bussiness", "FinTech", "Economics", "Accounting", "Finnancial Engineering", "Physics / Engineering / Mathemathics", "Banking", "Computer Science / Information Technology", "International Bussiness", "Corporate / Bussiness Law"
+        ];
     }
 }
